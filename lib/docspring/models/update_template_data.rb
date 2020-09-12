@@ -13,78 +13,20 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module DocSpring
-  class CombinedSubmission
-    attr_accessor :metadata
-
-    attr_accessor :expired
-
-    attr_accessor :expires_at
-
-    attr_accessor :source_pdfs
-
-    attr_accessor :pdf_hash
-
-    attr_accessor :download_url
-
-    attr_accessor :submission_ids
-
-    attr_accessor :id
-
-    attr_accessor :state
-
-    attr_accessor :actions
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+  class UpdateTemplateData
+    attr_accessor :template
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'metadata' => :'metadata',
-        :'expired' => :'expired',
-        :'expires_at' => :'expires_at',
-        :'source_pdfs' => :'source_pdfs',
-        :'pdf_hash' => :'pdf_hash',
-        :'download_url' => :'download_url',
-        :'submission_ids' => :'submission_ids',
-        :'id' => :'id',
-        :'state' => :'state',
-        :'actions' => :'actions'
+        :'template' => :'template'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'metadata' => :'Object',
-        :'expired' => :'BOOLEAN',
-        :'expires_at' => :'String',
-        :'source_pdfs' => :'Array<Object>',
-        :'pdf_hash' => :'String',
-        :'download_url' => :'String',
-        :'submission_ids' => :'Array<String>',
-        :'id' => :'String',
-        :'state' => :'String',
-        :'actions' => :'Array<CombinedSubmissionAction>'
+        :'template' => :'TemplatestemplateIdTemplate'
       }
     end
 
@@ -96,50 +38,8 @@ module DocSpring
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'metadata')
-        self.metadata = attributes[:'metadata']
-      end
-
-      if attributes.has_key?(:'expired')
-        self.expired = attributes[:'expired']
-      end
-
-      if attributes.has_key?(:'expires_at')
-        self.expires_at = attributes[:'expires_at']
-      end
-
-      if attributes.has_key?(:'source_pdfs')
-        if (value = attributes[:'source_pdfs']).is_a?(Array)
-          self.source_pdfs = value
-        end
-      end
-
-      if attributes.has_key?(:'pdf_hash')
-        self.pdf_hash = attributes[:'pdf_hash']
-      end
-
-      if attributes.has_key?(:'download_url')
-        self.download_url = attributes[:'download_url']
-      end
-
-      if attributes.has_key?(:'submission_ids')
-        if (value = attributes[:'submission_ids']).is_a?(Array)
-          self.submission_ids = value
-        end
-      end
-
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'actions')
-        if (value = attributes[:'actions']).is_a?(Array)
-          self.actions = value
-        end
+      if attributes.has_key?(:'template')
+        self.template = attributes[:'template']
       end
     end
 
@@ -147,25 +47,18 @@ module DocSpring
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @template.nil?
+        invalid_properties.push('invalid value for "template", template cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      state_validator = EnumAttributeValidator.new('String', ['pending', 'processed', 'error'])
-      return false unless state_validator.valid?(@state)
+      return false if @template.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] state Object to be assigned
-    def state=(state)
-      validator = EnumAttributeValidator.new('String', ['pending', 'processed', 'error'])
-      unless validator.valid?(state)
-        fail ArgumentError, 'invalid value for "state", must be one of #{validator.allowable_values}.'
-      end
-      @state = state
     end
 
     # Checks equality by comparing each attribute.
@@ -173,16 +66,7 @@ module DocSpring
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          metadata == o.metadata &&
-          expired == o.expired &&
-          expires_at == o.expires_at &&
-          source_pdfs == o.source_pdfs &&
-          pdf_hash == o.pdf_hash &&
-          download_url == o.download_url &&
-          submission_ids == o.submission_ids &&
-          id == o.id &&
-          state == o.state &&
-          actions == o.actions
+          template == o.template
     end
 
     # @see the `==` method
@@ -194,7 +78,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [metadata, expired, expires_at, source_pdfs, pdf_hash, download_url, submission_ids, id, state, actions].hash
+      [template].hash
     end
 
     # Builds the object from hash

@@ -13,12 +13,10 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module DocSpring
-  class Templatesv2TemplateDocument
-    attr_accessor :metadata
+  class UpdateTemplateResponse
+    attr_accessor :errors
 
-    attr_accessor :id
-
-    attr_accessor :storage
+    attr_accessor :status
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -45,18 +43,16 @@ module DocSpring
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'metadata' => :'metadata',
-        :'id' => :'id',
-        :'storage' => :'storage'
+        :'errors' => :'errors',
+        :'status' => :'status'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'metadata' => :'Templatesv2TemplateDocumentMetadata',
-        :'id' => :'String',
-        :'storage' => :'String'
+        :'errors' => :'Array<String>',
+        :'status' => :'String'
       }
     end
 
@@ -68,16 +64,14 @@ module DocSpring
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'metadata')
-        self.metadata = attributes[:'metadata']
+      if attributes.has_key?(:'errors')
+        if (value = attributes[:'errors']).is_a?(Array)
+          self.errors = value
+        end
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'storage')
-        self.storage = attributes[:'storage']
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
       end
     end
 
@@ -91,19 +85,19 @@ module DocSpring
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      storage_validator = EnumAttributeValidator.new('String', ['cache'])
-      return false unless storage_validator.valid?(@storage)
+      status_validator = EnumAttributeValidator.new('String', ['success', 'error'])
+      return false unless status_validator.valid?(@status)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] storage Object to be assigned
-    def storage=(storage)
-      validator = EnumAttributeValidator.new('String', ['cache'])
-      unless validator.valid?(storage)
-        fail ArgumentError, 'invalid value for "storage", must be one of #{validator.allowable_values}.'
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ['success', 'error'])
+      unless validator.valid?(status)
+        fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
       end
-      @storage = storage
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -111,9 +105,8 @@ module DocSpring
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          metadata == o.metadata &&
-          id == o.id &&
-          storage == o.storage
+          errors == o.errors &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -125,7 +118,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [metadata, id, storage].hash
+      [errors, status].hash
     end
 
     # Builds the object from hash

@@ -24,6 +24,8 @@ module DocSpring
 
     attr_accessor :metadata
 
+    attr_accessor :field_overrides
+
     attr_accessor :data_requests
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -34,6 +36,7 @@ module DocSpring
         :'html' => :'html',
         :'css' => :'css',
         :'metadata' => :'metadata',
+        :'field_overrides' => :'field_overrides',
         :'data_requests' => :'data_requests'
       }
     end
@@ -46,6 +49,7 @@ module DocSpring
         :'html' => :'String',
         :'css' => :'String',
         :'metadata' => :'Object',
+        :'field_overrides' => :'Object',
         :'data_requests' => :'Array<CreateSubmissionDataRequestData>'
       }
     end
@@ -76,6 +80,10 @@ module DocSpring
 
       if attributes.has_key?(:'metadata')
         self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.has_key?(:'field_overrides')
+        self.field_overrides = attributes[:'field_overrides']
       end
 
       if attributes.has_key?(:'data_requests')
@@ -113,6 +121,7 @@ module DocSpring
           html == o.html &&
           css == o.css &&
           metadata == o.metadata &&
+          field_overrides == o.field_overrides &&
           data_requests == o.data_requests
     end
 
@@ -125,7 +134,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [test, data, html, css, metadata, data_requests].hash
+      [test, data, html, css, metadata, field_overrides, data_requests].hash
     end
 
     # Builds the object from hash

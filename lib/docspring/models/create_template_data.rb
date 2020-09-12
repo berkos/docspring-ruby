@@ -26,7 +26,7 @@ module DocSpring
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'template' => :'Templatesv2Template'
+        :'template' => :'TemplatesdesccachedUploadTemplate'
       }
     end
 

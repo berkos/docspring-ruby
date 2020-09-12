@@ -6,6 +6,8 @@ describe DocSpring::Client do
     DocSpring.configure do |c|
       c.api_token_id = 'api_token123'
       c.api_token_secret = 'testsecret123'
+    end
+    DocSpring.configure do |c|
       c.host = 'http://api.docspring.local:31337'
     end
   end
@@ -16,20 +18,25 @@ describe DocSpring::Client do
       template_id = 'tpl_000000000000000001'
 
       expect(client).to receive(:sleep).with(1).once
-
       response = client.generate_pdf(
         template_id: template_id,
         data: {
           title: 'Test PDF',
           description: 'This PDF is great!',
+        },
+        field_overrides: {
+          title: {
+            required: false
+          }
         }
       )
+      submission = response.submission
 
       expect(response.status).to eq 'success'
-      submission = response.submission
       expect(submission.id).to start_with 'sub_'
       expect(submission.expired).to eq false
       expect(submission.state).to eq 'processed'
+      expect(submission.pdf_hash).to eq 'TEST_SUBMISSION_SHA256_HASH'
       expect(submission.download_url).to include 'submissions/submission.pdf'
     end
 
@@ -98,6 +105,7 @@ describe DocSpring::Client do
       expect(submission1.id).to start_with 'sub_'
       expect(submission1.expired).to eq false
       expect(submission1.state).to eq 'processed'
+      expect(submission1.pdf_hash).to eq 'TEST_SUBMISSION_SHA256_HASH'
       expect(submission1.download_url).to include 'submissions/submission.pdf'
 
       submission_response2 = response.submissions[1]
@@ -105,6 +113,7 @@ describe DocSpring::Client do
       submission2 = submission_response2.submission
       expect(submission2.id).to start_with 'sub_'
       expect(submission2.expired).to eq false
+      expect(submission2.pdf_hash).to eq 'TEST_SUBMISSION_SHA256_HASH'
       expect(submission2.state).to eq 'processed'
     end
 
@@ -154,6 +163,7 @@ describe DocSpring::Client do
       submission2 = submission_response2.submission
       expect(submission2.id).to start_with 'sub_'
       expect(submission2.expired).to eq false
+      expect(submission2.pdf_hash).to eq nil
       expect(submission2.state).to eq 'invalid_data'
     end
   end
@@ -212,6 +222,7 @@ describe DocSpring::Client do
       )
       expect(combined_submission.download_url).to include(
         'combined_submissions/combined_submission.pdf')
+      expect(combined_submission.pdf_hash).to eq 'TEST_COMBINED_SUBMISSION_SHA256_HASH'
     end
   end
 
@@ -254,6 +265,7 @@ describe DocSpring::Client do
       end
       expect(combined_submission.download_url).to include(
         'combined_submissions/combined_submission.pdf')
+      expect(combined_submission.pdf_hash).to eq 'TEST_COMBINED_SUBMISSION_SHA256_HASH'
     end
   end
 end

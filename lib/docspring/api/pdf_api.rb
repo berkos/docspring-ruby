@@ -394,34 +394,87 @@ module DocSpring
       return data, status_code, headers
     end
 
-    # Upload a new PDF template with a file upload
+    # Create a new HTML template
+    # @param create_template_data1 
+    # @param [Hash] opts the optional parameters
+    # @return [PendingTemplate]
+    def create_html_template(create_template_data1, opts = {})
+      data, _status_code, _headers = create_html_template_with_http_info(create_template_data1, opts)
+      data
+    end
+
+    # Create a new HTML template
+    # @param create_template_data1 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(PendingTemplate, Fixnum, Hash)>] PendingTemplate data, response status code and response headers
+    def create_html_template_with_http_info(create_template_data1, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PDFApi.create_html_template ...'
+      end
+      # verify the required parameter 'create_template_data1' is set
+      if @api_client.config.client_side_validation && create_template_data1.nil?
+        fail ArgumentError, "Missing the required parameter 'create_template_data1' when calling PDFApi.create_html_template"
+      end
+      # resource path
+      local_var_path = '/templates?desc=html'
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(create_template_data1)
+      auth_names = ['api_token_basic']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'PendingTemplate')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PDFApi#create_html_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Create a new PDF template with a form POST file upload
     # @param template_document 
     # @param template_name 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :template_parent_folder_id 
     # @return [PendingTemplate]
-    def create_template(template_document, template_name, opts = {})
-      data, _status_code, _headers = create_template_with_http_info(template_document, template_name, opts)
+    def create_pdf_template(template_document, template_name, opts = {})
+      data, _status_code, _headers = create_pdf_template_with_http_info(template_document, template_name, opts)
       data
     end
 
-    # Upload a new PDF template with a file upload
+    # Create a new PDF template with a form POST file upload
     # @param template_document 
     # @param template_name 
     # @param [Hash] opts the optional parameters
     # @option opts [String] :template_parent_folder_id 
     # @return [Array<(PendingTemplate, Fixnum, Hash)>] PendingTemplate data, response status code and response headers
-    def create_template_with_http_info(template_document, template_name, opts = {})
+    def create_pdf_template_with_http_info(template_document, template_name, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: PDFApi.create_template ...'
+        @api_client.config.logger.debug 'Calling API: PDFApi.create_pdf_template ...'
       end
       # verify the required parameter 'template_document' is set
       if @api_client.config.client_side_validation && template_document.nil?
-        fail ArgumentError, "Missing the required parameter 'template_document' when calling PDFApi.create_template"
+        fail ArgumentError, "Missing the required parameter 'template_document' when calling PDFApi.create_pdf_template"
       end
       # verify the required parameter 'template_name' is set
       if @api_client.config.client_side_validation && template_name.nil?
-        fail ArgumentError, "Missing the required parameter 'template_name' when calling PDFApi.create_template"
+        fail ArgumentError, "Missing the required parameter 'template_name' when calling PDFApi.create_pdf_template"
       end
       # resource path
       local_var_path = '/templates'
@@ -453,7 +506,7 @@ module DocSpring
         :auth_names => auth_names,
         :return_type => 'PendingTemplate')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: PDFApi#create_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: PDFApi#create_pdf_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -462,8 +515,8 @@ module DocSpring
     # @param create_template_data 
     # @param [Hash] opts the optional parameters
     # @return [PendingTemplate]
-    def create_template_from_upload(create_template_data, opts = {})
-      data, _status_code, _headers = create_template_from_upload_with_http_info(create_template_data, opts)
+    def create_pdf_template_from_upload(create_template_data, opts = {})
+      data, _status_code, _headers = create_pdf_template_from_upload_with_http_info(create_template_data, opts)
       data
     end
 
@@ -471,16 +524,16 @@ module DocSpring
     # @param create_template_data 
     # @param [Hash] opts the optional parameters
     # @return [Array<(PendingTemplate, Fixnum, Hash)>] PendingTemplate data, response status code and response headers
-    def create_template_from_upload_with_http_info(create_template_data, opts = {})
+    def create_pdf_template_from_upload_with_http_info(create_template_data, opts = {})
       if @api_client.config.debugging
-        @api_client.config.logger.debug 'Calling API: PDFApi.create_template_from_upload ...'
+        @api_client.config.logger.debug 'Calling API: PDFApi.create_pdf_template_from_upload ...'
       end
       # verify the required parameter 'create_template_data' is set
       if @api_client.config.client_side_validation && create_template_data.nil?
-        fail ArgumentError, "Missing the required parameter 'create_template_data' when calling PDFApi.create_template_from_upload"
+        fail ArgumentError, "Missing the required parameter 'create_template_data' when calling PDFApi.create_pdf_template_from_upload"
       end
       # resource path
-      local_var_path = '/templates?v=2'
+      local_var_path = '/templates?desc=cached_upload'
 
       # query parameters
       query_params = {}
@@ -506,7 +559,7 @@ module DocSpring
         :auth_names => auth_names,
         :return_type => 'PendingTemplate')
       if @api_client.config.debugging
-        @api_client.config.logger.debug "API called: PDFApi#create_template_from_upload\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+        @api_client.config.logger.debug "API called: PDFApi#create_pdf_template_from_upload\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end
@@ -1473,6 +1526,65 @@ module DocSpring
         :return_type => 'UpdateDataRequestResponse')
       if @api_client.config.debugging
         @api_client.config.logger.debug "API called: PDFApi#update_data_request\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
+    # Update a Template
+    # @param template_id 
+    # @param update_template_data 
+    # @param [Hash] opts the optional parameters
+    # @return [UpdateTemplateResponse]
+    def update_template(template_id, update_template_data, opts = {})
+      data, _status_code, _headers = update_template_with_http_info(template_id, update_template_data, opts)
+      data
+    end
+
+    # Update a Template
+    # @param template_id 
+    # @param update_template_data 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(UpdateTemplateResponse, Fixnum, Hash)>] UpdateTemplateResponse data, response status code and response headers
+    def update_template_with_http_info(template_id, update_template_data, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PDFApi.update_template ...'
+      end
+      # verify the required parameter 'template_id' is set
+      if @api_client.config.client_side_validation && template_id.nil?
+        fail ArgumentError, "Missing the required parameter 'template_id' when calling PDFApi.update_template"
+      end
+      # verify the required parameter 'update_template_data' is set
+      if @api_client.config.client_side_validation && update_template_data.nil?
+        fail ArgumentError, "Missing the required parameter 'update_template_data' when calling PDFApi.update_template"
+      end
+      # resource path
+      local_var_path = '/templates/{template_id}'.sub('{' + 'template_id' + '}', template_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(update_template_data)
+      auth_names = ['api_token_basic']
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'UpdateTemplateResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PDFApi#update_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
       end
       return data, status_code, headers
     end

@@ -13,50 +13,20 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module DocSpring
-  class Templatesv2TemplateDocumentMetadata
-    attr_accessor :filename
-
-    attr_accessor :size
-
-    attr_accessor :mime_type
-
-    class EnumAttributeValidator
-      attr_reader :datatype
-      attr_reader :allowable_values
-
-      def initialize(datatype, allowable_values)
-        @allowable_values = allowable_values.map do |value|
-          case datatype.to_s
-          when /Integer/i
-            value.to_i
-          when /Float/i
-            value.to_f
-          else
-            value
-          end
-        end
-      end
-
-      def valid?(value)
-        !value || allowable_values.include?(value)
-      end
-    end
+  class CreateTemplateData1
+    attr_accessor :template
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'filename' => :'filename',
-        :'size' => :'size',
-        :'mime_type' => :'mime_type'
+        :'template' => :'template'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'filename' => :'String',
-        :'size' => :'Integer',
-        :'mime_type' => :'String'
+        :'template' => :'TemplatesdesccachedUploadTemplate'
       }
     end
 
@@ -68,16 +38,8 @@ module DocSpring
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'filename')
-        self.filename = attributes[:'filename']
-      end
-
-      if attributes.has_key?(:'size')
-        self.size = attributes[:'size']
-      end
-
-      if attributes.has_key?(:'mime_type')
-        self.mime_type = attributes[:'mime_type']
+      if attributes.has_key?(:'template')
+        self.template = attributes[:'template']
       end
     end
 
@@ -85,25 +47,18 @@ module DocSpring
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
+      if @template.nil?
+        invalid_properties.push('invalid value for "template", template cannot be nil.')
+      end
+
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      mime_type_validator = EnumAttributeValidator.new('String', ['application/pdf'])
-      return false unless mime_type_validator.valid?(@mime_type)
+      return false if @template.nil?
       true
-    end
-
-    # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] mime_type Object to be assigned
-    def mime_type=(mime_type)
-      validator = EnumAttributeValidator.new('String', ['application/pdf'])
-      unless validator.valid?(mime_type)
-        fail ArgumentError, 'invalid value for "mime_type", must be one of #{validator.allowable_values}.'
-      end
-      @mime_type = mime_type
     end
 
     # Checks equality by comparing each attribute.
@@ -111,9 +66,7 @@ module DocSpring
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          filename == o.filename &&
-          size == o.size &&
-          mime_type == o.mime_type
+          template == o.template
     end
 
     # @see the `==` method
@@ -125,7 +78,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [filename, size, mime_type].hash
+      [template].hash
     end
 
     # Builds the object from hash

@@ -11,8 +11,9 @@ Method | HTTP request | Description
 [**create_custom_file_from_upload**](PDFApi.md#create_custom_file_from_upload) | **POST** /custom_files | Create a new custom file from a cached presign upload
 [**create_data_request_token**](PDFApi.md#create_data_request_token) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
 [**create_folder**](PDFApi.md#create_folder) | **POST** /folders/ | Create a folder
-[**create_template**](PDFApi.md#create_template) | **POST** /templates | Upload a new PDF template with a file upload
-[**create_template_from_upload**](PDFApi.md#create_template_from_upload) | **POST** /templates?v&#x3D;2 | Create a new PDF template from a cached presign upload
+[**create_html_template**](PDFApi.md#create_html_template) | **POST** /templates?desc&#x3D;html | Create a new HTML template
+[**create_pdf_template**](PDFApi.md#create_pdf_template) | **POST** /templates | Create a new PDF template with a form POST file upload
+[**create_pdf_template_from_upload**](PDFApi.md#create_pdf_template_from_upload) | **POST** /templates?desc&#x3D;cached_upload | Create a new PDF template from a cached presign upload
 [**delete_folder**](PDFApi.md#delete_folder) | **DELETE** /folders/{folder_id} | Delete a folder
 [**expire_combined_submission**](PDFApi.md#expire_combined_submission) | **DELETE** /combined_submissions/{combined_submission_id} | Expire a combined submission
 [**expire_submission**](PDFApi.md#expire_submission) | **DELETE** /submissions/{submission_id} | Expire a PDF submission
@@ -31,6 +32,7 @@ Method | HTTP request | Description
 [**rename_folder**](PDFApi.md#rename_folder) | **POST** /folders/{folder_id}/rename | Rename a folder
 [**test_authentication**](PDFApi.md#test_authentication) | **GET** /authentication | Test Authentication
 [**update_data_request**](PDFApi.md#update_data_request) | **PUT** /data_requests/{data_request_id} | Update a submission data request
+[**update_template**](PDFApi.md#update_template) | **PUT** /templates/{template_id} | Update a Template
 
 
 # **batch_generate_pdf_v1**
@@ -378,10 +380,59 @@ Name | Type | Description  | Notes
 
 
 
-# **create_template**
-> PendingTemplate create_template(template_document, template_name, opts)
+# **create_html_template**
+> PendingTemplate create_html_template(create_template_data1)
 
-Upload a new PDF template with a file upload
+Create a new HTML template
+
+### Example
+```ruby
+# load the gem
+require 'docspring'
+# setup authorization
+DocSpring.configure do |config|
+  # Configure HTTP basic authorization: api_token_basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = DocSpring::PDFApi.new
+create_template_data1 = DocSpring::CreateTemplateData1.new # CreateTemplateData1 | 
+
+begin
+  #Create a new HTML template
+  result = api_instance.create_html_template(create_template_data1)
+  p result
+rescue DocSpring::ApiError => e
+  puts "Exception when calling PDFApi->create_html_template: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **create_template_data1** | [**CreateTemplateData1**](CreateTemplateData1.md)|  | 
+
+### Return type
+
+[**PendingTemplate**](PendingTemplate.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
+# **create_pdf_template**
+> PendingTemplate create_pdf_template(template_document, template_name, opts)
+
+Create a new PDF template with a form POST file upload
 
 ### Example
 ```ruby
@@ -402,11 +453,11 @@ opts = {
 }
 
 begin
-  #Upload a new PDF template with a file upload
-  result = api_instance.create_template(template_document, template_name, opts)
+  #Create a new PDF template with a form POST file upload
+  result = api_instance.create_pdf_template(template_document, template_name, opts)
   p result
 rescue DocSpring::ApiError => e
-  puts "Exception when calling PDFApi->create_template: #{e}"
+  puts "Exception when calling PDFApi->create_pdf_template: #{e}"
 end
 ```
 
@@ -433,8 +484,8 @@ Name | Type | Description  | Notes
 
 
 
-# **create_template_from_upload**
-> PendingTemplate create_template_from_upload(create_template_data)
+# **create_pdf_template_from_upload**
+> PendingTemplate create_pdf_template_from_upload(create_template_data)
 
 Create a new PDF template from a cached presign upload
 
@@ -454,10 +505,10 @@ create_template_data = DocSpring::CreateTemplateData.new # CreateTemplateData |
 
 begin
   #Create a new PDF template from a cached presign upload
-  result = api_instance.create_template_from_upload(create_template_data)
+  result = api_instance.create_pdf_template_from_upload(create_template_data)
   p result
 rescue DocSpring::ApiError => e
-  puts "Exception when calling PDFApi->create_template_from_upload: #{e}"
+  puts "Exception when calling PDFApi->create_pdf_template_from_upload: #{e}"
 end
 ```
 
@@ -1371,6 +1422,57 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**UpdateDataRequestResponse**](UpdateDataRequestResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
+# **update_template**
+> UpdateTemplateResponse update_template(template_id, update_template_data)
+
+Update a Template
+
+### Example
+```ruby
+# load the gem
+require 'docspring'
+# setup authorization
+DocSpring.configure do |config|
+  # Configure HTTP basic authorization: api_token_basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = DocSpring::PDFApi.new
+template_id = 'tpl_000000000000000003' # String | 
+update_template_data = DocSpring::UpdateTemplateData.new # UpdateTemplateData | 
+
+begin
+  #Update a Template
+  result = api_instance.update_template(template_id, update_template_data)
+  p result
+rescue DocSpring::ApiError => e
+  puts "Exception when calling PDFApi->update_template: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **String**|  | 
+ **update_template_data** | [**UpdateTemplateData**](UpdateTemplateData.md)|  | 
+
+### Return type
+
+[**UpdateTemplateResponse**](UpdateTemplateResponse.md)
 
 ### Authorization
 

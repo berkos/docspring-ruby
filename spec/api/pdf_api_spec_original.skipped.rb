@@ -124,33 +124,45 @@ describe 'PDFApi' do
       expect(result).to_not be_nil
     end
   end
-  # integration tests for create_template
-  # Upload a new PDF template with a file upload
+  # integration tests for create_html_template
+  # Create a new HTML template
+  # @param create_template_data1 
+  # @param [Hash] opts the optional parameters
+  # @return [PendingTemplate]
+  describe 'create_html_template test' do
+    it 'should work' do
+      create_template_data1 = DocSpring::CreateTemplateData1.new # CreateTemplateData1 | 
+      result = api_instance.create_html_template(create_template_data1)
+      expect(result).to_not be_nil
+    end
+  end
+  # integration tests for create_pdf_template
+  # Create a new PDF template with a form POST file upload
   # @param template_document 
   # @param template_name 
   # @param [Hash] opts the optional parameters
   # @option opts [String] :template_parent_folder_id 
   # @return [PendingTemplate]
-  describe 'create_template test' do
+  describe 'create_pdf_template test' do
     it 'should work' do
       template_document = File.new('/path/to/file') # File | 
       template_name = 'template_name_example' # String | 
       opts = {
         template_parent_folder_id: 'template_parent_folder_id_example' # String | 
       }
-      result = api_instance.create_template(template_document, template_name, opts)
+      result = api_instance.create_pdf_template(template_document, template_name, opts)
       expect(result).to_not be_nil
     end
   end
-  # integration tests for create_template_from_upload
+  # integration tests for create_pdf_template_from_upload
   # Create a new PDF template from a cached presign upload
   # @param create_template_data 
   # @param [Hash] opts the optional parameters
   # @return [PendingTemplate]
-  describe 'create_template_from_upload test' do
+  describe 'create_pdf_template_from_upload test' do
     it 'should work' do
       create_template_data = DocSpring::CreateTemplateData.new # CreateTemplateData | 
-      result = api_instance.create_template_from_upload(create_template_data)
+      result = api_instance.create_pdf_template_from_upload(create_template_data)
       expect(result).to_not be_nil
     end
   end
@@ -391,6 +403,20 @@ describe 'PDFApi' do
       data_request_id = 'drq_000000000000000001' # String | 
       update_submission_data_request_data = DocSpring::UpdateSubmissionDataRequestData.new # UpdateSubmissionDataRequestData | 
       result = api_instance.update_data_request(data_request_id, update_submission_data_request_data)
+      expect(result).to_not be_nil
+    end
+  end
+  # integration tests for update_template
+  # Update a Template
+  # @param template_id 
+  # @param update_template_data 
+  # @param [Hash] opts the optional parameters
+  # @return [UpdateTemplateResponse]
+  describe 'update_template test' do
+    it 'should work' do
+      template_id = 'tpl_000000000000000003' # String | 
+      update_template_data = DocSpring::UpdateTemplateData.new # UpdateTemplateData | 
+      result = api_instance.update_template(template_id, update_template_data)
       expect(result).to_not be_nil
     end
   end

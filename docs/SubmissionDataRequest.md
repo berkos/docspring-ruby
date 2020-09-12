@@ -20,5 +20,7 @@ Name | Type | Description | Notes
 **auth_user_id_hash** | **String** |  | [optional] 
 **auth_username_hash** | **String** |  | [optional] 
 **auth_phone_number_hash** | **String** |  | [optional] 
+**ip_address** | **String** |  | [optional] 
+**user_agent** | **String** |  | [optional] 
 
 

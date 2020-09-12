@@ -24,6 +24,8 @@ module DocSpring
 
     attr_accessor :allow_additional_properties
 
+    attr_accessor :description
+
     attr_accessor :public_submissions
 
     attr_accessor :slack_webhook_url
@@ -74,6 +76,7 @@ module DocSpring
         :'parent_folder_id' => :'parent_folder_id',
         :'expire_after' => :'expire_after',
         :'allow_additional_properties' => :'allow_additional_properties',
+        :'description' => :'description',
         :'public_submissions' => :'public_submissions',
         :'slack_webhook_url' => :'slack_webhook_url',
         :'path' => :'path',
@@ -95,6 +98,7 @@ module DocSpring
         :'parent_folder_id' => :'String',
         :'expire_after' => :'Float',
         :'allow_additional_properties' => :'BOOLEAN',
+        :'description' => :'String',
         :'public_submissions' => :'BOOLEAN',
         :'slack_webhook_url' => :'String',
         :'path' => :'String',
@@ -134,6 +138,10 @@ module DocSpring
 
       if attributes.has_key?(:'allow_additional_properties')
         self.allow_additional_properties = attributes[:'allow_additional_properties']
+      end
+
+      if attributes.has_key?(:'description')
+        self.description = attributes[:'description']
       end
 
       if attributes.has_key?(:'public_submissions')
@@ -212,6 +220,7 @@ module DocSpring
           parent_folder_id == o.parent_folder_id &&
           expire_after == o.expire_after &&
           allow_additional_properties == o.allow_additional_properties &&
+          description == o.description &&
           public_submissions == o.public_submissions &&
           slack_webhook_url == o.slack_webhook_url &&
           path == o.path &&
@@ -233,7 +242,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [expiration_interval, webhook_url, parent_folder_id, expire_after, allow_additional_properties, public_submissions, slack_webhook_url, path, public_web_form, editable_submissions, expire_submissions, name, template_type, id, redirect_url].hash
+      [expiration_interval, webhook_url, parent_folder_id, expire_after, allow_additional_properties, description, public_submissions, slack_webhook_url, path, public_web_form, editable_submissions, expire_submissions, name, template_type, id, redirect_url].hash
     end
 
     # Builds the object from hash

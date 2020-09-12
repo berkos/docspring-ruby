@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **processed_at** | **String** |  | [optional] 
 **state** | **String** |  | 
 **metadata** | **Object** |  | [optional] 
+**pdf_hash** | **String** |  | [optional] 
 **download_url** | **String** |  | [optional] 
 **permanent_download_url** | **String** |  | [optional] 
 **batch_id** | **String** |  | [optional] 

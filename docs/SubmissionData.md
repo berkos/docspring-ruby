@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **html** | **String** |  | [optional] 
 **css** | **String** |  | [optional] 
 **metadata** | **Object** |  | [optional] 
+**field_overrides** | **Object** |  | [optional] 
 **data_requests** | [**Array&lt;CreateSubmissionDataRequestData&gt;**](CreateSubmissionDataRequestData.md) |  | [optional] 
 
 

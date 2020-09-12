@@ -13,36 +13,12 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module DocSpring
-  class Submission
-    attr_accessor :id
+  class TemplatesdesccachedUploadTemplateDocumentMetadata
+    attr_accessor :filename
 
-    attr_accessor :template_id
+    attr_accessor :size
 
-    attr_accessor :test
-
-    attr_accessor :editable
-
-    attr_accessor :expired
-
-    attr_accessor :expires_at
-
-    attr_accessor :processed_at
-
-    attr_accessor :state
-
-    attr_accessor :metadata
-
-    attr_accessor :pdf_hash
-
-    attr_accessor :download_url
-
-    attr_accessor :permanent_download_url
-
-    attr_accessor :batch_id
-
-    attr_accessor :data_requests
-
-    attr_accessor :actions
+    attr_accessor :mime_type
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -69,42 +45,18 @@ module DocSpring
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'id' => :'id',
-        :'template_id' => :'template_id',
-        :'test' => :'test',
-        :'editable' => :'editable',
-        :'expired' => :'expired',
-        :'expires_at' => :'expires_at',
-        :'processed_at' => :'processed_at',
-        :'state' => :'state',
-        :'metadata' => :'metadata',
-        :'pdf_hash' => :'pdf_hash',
-        :'download_url' => :'download_url',
-        :'permanent_download_url' => :'permanent_download_url',
-        :'batch_id' => :'batch_id',
-        :'data_requests' => :'data_requests',
-        :'actions' => :'actions'
+        :'filename' => :'filename',
+        :'size' => :'size',
+        :'mime_type' => :'mime_type'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'id' => :'String',
-        :'template_id' => :'String',
-        :'test' => :'BOOLEAN',
-        :'editable' => :'BOOLEAN',
-        :'expired' => :'BOOLEAN',
-        :'expires_at' => :'String',
-        :'processed_at' => :'String',
-        :'state' => :'String',
-        :'metadata' => :'Object',
-        :'pdf_hash' => :'String',
-        :'download_url' => :'String',
-        :'permanent_download_url' => :'String',
-        :'batch_id' => :'String',
-        :'data_requests' => :'Array<SubmissionDataRequest>',
-        :'actions' => :'Array<SubmissionAction>'
+        :'filename' => :'String',
+        :'size' => :'Integer',
+        :'mime_type' => :'String'
       }
     end
 
@@ -116,68 +68,16 @@ module DocSpring
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'filename')
+        self.filename = attributes[:'filename']
       end
 
-      if attributes.has_key?(:'template_id')
-        self.template_id = attributes[:'template_id']
+      if attributes.has_key?(:'size')
+        self.size = attributes[:'size']
       end
 
-      if attributes.has_key?(:'test')
-        self.test = attributes[:'test']
-      end
-
-      if attributes.has_key?(:'editable')
-        self.editable = attributes[:'editable']
-      end
-
-      if attributes.has_key?(:'expired')
-        self.expired = attributes[:'expired']
-      end
-
-      if attributes.has_key?(:'expires_at')
-        self.expires_at = attributes[:'expires_at']
-      end
-
-      if attributes.has_key?(:'processed_at')
-        self.processed_at = attributes[:'processed_at']
-      end
-
-      if attributes.has_key?(:'state')
-        self.state = attributes[:'state']
-      end
-
-      if attributes.has_key?(:'metadata')
-        self.metadata = attributes[:'metadata']
-      end
-
-      if attributes.has_key?(:'pdf_hash')
-        self.pdf_hash = attributes[:'pdf_hash']
-      end
-
-      if attributes.has_key?(:'download_url')
-        self.download_url = attributes[:'download_url']
-      end
-
-      if attributes.has_key?(:'permanent_download_url')
-        self.permanent_download_url = attributes[:'permanent_download_url']
-      end
-
-      if attributes.has_key?(:'batch_id')
-        self.batch_id = attributes[:'batch_id']
-      end
-
-      if attributes.has_key?(:'data_requests')
-        if (value = attributes[:'data_requests']).is_a?(Array)
-          self.data_requests = value
-        end
-      end
-
-      if attributes.has_key?(:'actions')
-        if (value = attributes[:'actions']).is_a?(Array)
-          self.actions = value
-        end
+      if attributes.has_key?(:'mime_type')
+        self.mime_type = attributes[:'mime_type']
       end
     end
 
@@ -185,45 +85,25 @@ module DocSpring
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @id.nil?
-        invalid_properties.push('invalid value for "id", id cannot be nil.')
-      end
-
-      if @test.nil?
-        invalid_properties.push('invalid value for "test", test cannot be nil.')
-      end
-
-      if @expired.nil?
-        invalid_properties.push('invalid value for "expired", expired cannot be nil.')
-      end
-
-      if @state.nil?
-        invalid_properties.push('invalid value for "state", state cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @id.nil?
-      return false if @test.nil?
-      return false if @expired.nil?
-      return false if @state.nil?
-      state_validator = EnumAttributeValidator.new('String', ['pending', 'processed', 'invalid_data', 'error', 'image_download_failed', 'image_processing_failed', 'waiting_for_data_requests', 'syntax_error', 'account_suspended', 'license_revoked', 'accidental'])
-      return false unless state_validator.valid?(@state)
+      mime_type_validator = EnumAttributeValidator.new('String', ['application/pdf'])
+      return false unless mime_type_validator.valid?(@mime_type)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] state Object to be assigned
-    def state=(state)
-      validator = EnumAttributeValidator.new('String', ['pending', 'processed', 'invalid_data', 'error', 'image_download_failed', 'image_processing_failed', 'waiting_for_data_requests', 'syntax_error', 'account_suspended', 'license_revoked', 'accidental'])
-      unless validator.valid?(state)
-        fail ArgumentError, 'invalid value for "state", must be one of #{validator.allowable_values}.'
+    # @param [Object] mime_type Object to be assigned
+    def mime_type=(mime_type)
+      validator = EnumAttributeValidator.new('String', ['application/pdf'])
+      unless validator.valid?(mime_type)
+        fail ArgumentError, 'invalid value for "mime_type", must be one of #{validator.allowable_values}.'
       end
-      @state = state
+      @mime_type = mime_type
     end
 
     # Checks equality by comparing each attribute.
@@ -231,21 +111,9 @@ module DocSpring
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          id == o.id &&
-          template_id == o.template_id &&
-          test == o.test &&
-          editable == o.editable &&
-          expired == o.expired &&
-          expires_at == o.expires_at &&
-          processed_at == o.processed_at &&
-          state == o.state &&
-          metadata == o.metadata &&
-          pdf_hash == o.pdf_hash &&
-          download_url == o.download_url &&
-          permanent_download_url == o.permanent_download_url &&
-          batch_id == o.batch_id &&
-          data_requests == o.data_requests &&
-          actions == o.actions
+          filename == o.filename &&
+          size == o.size &&
+          mime_type == o.mime_type
     end
 
     # @see the `==` method
@@ -257,7 +125,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, template_id, test, editable, expired, expires_at, processed_at, state, metadata, pdf_hash, download_url, permanent_download_url, batch_id, data_requests, actions].hash
+      [filename, size, mime_type].hash
     end
 
     # Builds the object from hash

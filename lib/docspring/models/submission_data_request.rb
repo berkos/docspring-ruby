@@ -48,6 +48,10 @@ module DocSpring
 
     attr_accessor :auth_phone_number_hash
 
+    attr_accessor :ip_address
+
+    attr_accessor :user_agent
+
     class EnumAttributeValidator
       attr_reader :datatype
       attr_reader :allowable_values
@@ -89,7 +93,9 @@ module DocSpring
         :'auth_session_id_hash' => :'auth_session_id_hash',
         :'auth_user_id_hash' => :'auth_user_id_hash',
         :'auth_username_hash' => :'auth_username_hash',
-        :'auth_phone_number_hash' => :'auth_phone_number_hash'
+        :'auth_phone_number_hash' => :'auth_phone_number_hash',
+        :'ip_address' => :'ip_address',
+        :'user_agent' => :'user_agent'
       }
     end
 
@@ -112,7 +118,9 @@ module DocSpring
         :'auth_session_id_hash' => :'String',
         :'auth_user_id_hash' => :'String',
         :'auth_username_hash' => :'String',
-        :'auth_phone_number_hash' => :'String'
+        :'auth_phone_number_hash' => :'String',
+        :'ip_address' => :'String',
+        :'user_agent' => :'String'
       }
     end
 
@@ -192,6 +200,14 @@ module DocSpring
 
       if attributes.has_key?(:'auth_phone_number_hash')
         self.auth_phone_number_hash = attributes[:'auth_phone_number_hash']
+      end
+
+      if attributes.has_key?(:'ip_address')
+        self.ip_address = attributes[:'ip_address']
+      end
+
+      if attributes.has_key?(:'user_agent')
+        self.user_agent = attributes[:'user_agent']
       end
     end
 
@@ -300,7 +316,9 @@ module DocSpring
           auth_session_id_hash == o.auth_session_id_hash &&
           auth_user_id_hash == o.auth_user_id_hash &&
           auth_username_hash == o.auth_username_hash &&
-          auth_phone_number_hash == o.auth_phone_number_hash
+          auth_phone_number_hash == o.auth_phone_number_hash &&
+          ip_address == o.ip_address &&
+          user_agent == o.user_agent
     end
 
     # @see the `==` method
@@ -312,7 +330,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, email, order, fields, metadata, state, viewed_at, completed_at, auth_type, auth_second_factor_type, auth_provider, auth_session_started_at, auth_session_id_hash, auth_user_id_hash, auth_username_hash, auth_phone_number_hash].hash
+      [id, name, email, order, fields, metadata, state, viewed_at, completed_at, auth_type, auth_second_factor_type, auth_provider, auth_session_started_at, auth_session_id_hash, auth_user_id_hash, auth_username_hash, auth_phone_number_hash, ip_address, user_agent].hash
     end
 
     # Builds the object from hash
