@@ -4,6 +4,7 @@ All URIs are relative to *https://api.docspring.com/api/v1*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**add_fields_to_template**](PDFApi.md#add_fields_to_template) | **PUT** /templates/{template_id}/add_fields | Add new fields to a Template
 [**batch_generate_pdf_v1**](PDFApi.md#batch_generate_pdf_v1) | **POST** /templates/{template_id}/submissions/batch | Generates multiple PDFs
 [**batch_generate_pdfs**](PDFApi.md#batch_generate_pdfs) | **POST** /submissions/batches | Generates multiple PDFs
 [**combine_pdfs**](PDFApi.md#combine_pdfs) | **POST** /combined_submissions?v&#x3D;2 | Merge submission PDFs, template PDFs, or custom files
@@ -33,6 +34,57 @@ Method | HTTP request | Description
 [**test_authentication**](PDFApi.md#test_authentication) | **GET** /authentication | Test Authentication
 [**update_data_request**](PDFApi.md#update_data_request) | **PUT** /data_requests/{data_request_id} | Update a submission data request
 [**update_template**](PDFApi.md#update_template) | **PUT** /templates/{template_id} | Update a Template
+
+
+# **add_fields_to_template**
+> AddFieldsTemplateResponse add_fields_to_template(template_id, add_fields_data)
+
+Add new fields to a Template
+
+### Example
+```ruby
+# load the gem
+require 'docspring'
+# setup authorization
+DocSpring.configure do |config|
+  # Configure HTTP basic authorization: api_token_basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = DocSpring::PDFApi.new
+template_id = 'tpl_000000000000000002' # String | 
+add_fields_data = DocSpring::AddFieldsData.new # AddFieldsData | 
+
+begin
+  #Add new fields to a Template
+  result = api_instance.add_fields_to_template(template_id, add_fields_data)
+  p result
+rescue DocSpring::ApiError => e
+  puts "Exception when calling PDFApi->add_fields_to_template: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **String**|  | 
+ **add_fields_data** | [**AddFieldsData**](AddFieldsData.md)|  | 
+
+### Return type
+
+[**AddFieldsTemplateResponse**](AddFieldsTemplateResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 
 
 # **batch_generate_pdf_v1**
@@ -381,7 +433,7 @@ Name | Type | Description  | Notes
 
 
 # **create_html_template**
-> PendingTemplate create_html_template(create_template_data1)
+> PendingTemplate create_html_template(create_html_template_data)
 
 Create a new HTML template
 
@@ -397,11 +449,11 @@ DocSpring.configure do |config|
 end
 
 api_instance = DocSpring::PDFApi.new
-create_template_data1 = DocSpring::CreateTemplateData1.new # CreateTemplateData1 | 
+create_html_template_data = DocSpring::CreateHtmlTemplateData.new # CreateHtmlTemplateData | 
 
 begin
   #Create a new HTML template
-  result = api_instance.create_html_template(create_template_data1)
+  result = api_instance.create_html_template(create_html_template_data)
   p result
 rescue DocSpring::ApiError => e
   puts "Exception when calling PDFApi->create_html_template: #{e}"
@@ -412,7 +464,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_template_data1** | [**CreateTemplateData1**](CreateTemplateData1.md)|  | 
+ **create_html_template_data** | [**CreateHtmlTemplateData**](CreateHtmlTemplateData.md)|  | 
 
 ### Return type
 
@@ -485,7 +537,7 @@ Name | Type | Description  | Notes
 
 
 # **create_pdf_template_from_upload**
-> PendingTemplate create_pdf_template_from_upload(create_template_data)
+> PendingTemplate create_pdf_template_from_upload(create_template_from_upload_data)
 
 Create a new PDF template from a cached presign upload
 
@@ -501,11 +553,11 @@ DocSpring.configure do |config|
 end
 
 api_instance = DocSpring::PDFApi.new
-create_template_data = DocSpring::CreateTemplateData.new # CreateTemplateData | 
+create_template_from_upload_data = DocSpring::CreateTemplateFromUploadData.new # CreateTemplateFromUploadData | 
 
 begin
   #Create a new PDF template from a cached presign upload
-  result = api_instance.create_pdf_template_from_upload(create_template_data)
+  result = api_instance.create_pdf_template_from_upload(create_template_from_upload_data)
   p result
 rescue DocSpring::ApiError => e
   puts "Exception when calling PDFApi->create_pdf_template_from_upload: #{e}"
@@ -516,7 +568,7 @@ end
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **create_template_data** | [**CreateTemplateData**](CreateTemplateData.md)|  | 
+ **create_template_from_upload_data** | [**CreateTemplateFromUploadData**](CreateTemplateFromUploadData.md)|  | 
 
 ### Return type
 

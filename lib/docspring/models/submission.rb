@@ -32,6 +32,8 @@ module DocSpring
 
     attr_accessor :metadata
 
+    attr_accessor :truncated_text
+
     attr_accessor :pdf_hash
 
     attr_accessor :download_url
@@ -78,6 +80,7 @@ module DocSpring
         :'processed_at' => :'processed_at',
         :'state' => :'state',
         :'metadata' => :'metadata',
+        :'truncated_text' => :'truncated_text',
         :'pdf_hash' => :'pdf_hash',
         :'download_url' => :'download_url',
         :'permanent_download_url' => :'permanent_download_url',
@@ -99,6 +102,7 @@ module DocSpring
         :'processed_at' => :'String',
         :'state' => :'String',
         :'metadata' => :'Object',
+        :'truncated_text' => :'Object',
         :'pdf_hash' => :'String',
         :'download_url' => :'String',
         :'permanent_download_url' => :'String',
@@ -150,6 +154,10 @@ module DocSpring
 
       if attributes.has_key?(:'metadata')
         self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.has_key?(:'truncated_text')
+        self.truncated_text = attributes[:'truncated_text']
       end
 
       if attributes.has_key?(:'pdf_hash')
@@ -240,6 +248,7 @@ module DocSpring
           processed_at == o.processed_at &&
           state == o.state &&
           metadata == o.metadata &&
+          truncated_text == o.truncated_text &&
           pdf_hash == o.pdf_hash &&
           download_url == o.download_url &&
           permanent_download_url == o.permanent_download_url &&
@@ -257,7 +266,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, template_id, test, editable, expired, expires_at, processed_at, state, metadata, pdf_hash, download_url, permanent_download_url, batch_id, data_requests, actions].hash
+      [id, template_id, test, editable, expired, expires_at, processed_at, state, metadata, truncated_text, pdf_hash, download_url, permanent_download_url, batch_id, data_requests, actions].hash
     end
 
     # Builds the object from hash

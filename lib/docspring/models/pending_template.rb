@@ -44,6 +44,8 @@ module DocSpring
 
     attr_accessor :id
 
+    attr_accessor :locked
+
     attr_accessor :redirect_url
 
     class EnumAttributeValidator
@@ -86,6 +88,7 @@ module DocSpring
         :'name' => :'name',
         :'template_type' => :'template_type',
         :'id' => :'id',
+        :'locked' => :'locked',
         :'redirect_url' => :'redirect_url'
       }
     end
@@ -108,6 +111,7 @@ module DocSpring
         :'name' => :'String',
         :'template_type' => :'String',
         :'id' => :'String',
+        :'locked' => :'BOOLEAN',
         :'redirect_url' => :'String'
       }
     end
@@ -180,6 +184,10 @@ module DocSpring
         self.id = attributes[:'id']
       end
 
+      if attributes.has_key?(:'locked')
+        self.locked = attributes[:'locked']
+      end
+
       if attributes.has_key?(:'redirect_url')
         self.redirect_url = attributes[:'redirect_url']
       end
@@ -230,6 +238,7 @@ module DocSpring
           name == o.name &&
           template_type == o.template_type &&
           id == o.id &&
+          locked == o.locked &&
           redirect_url == o.redirect_url
     end
 
@@ -242,7 +251,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [expiration_interval, webhook_url, parent_folder_id, expire_after, allow_additional_properties, description, public_submissions, slack_webhook_url, path, public_web_form, editable_submissions, expire_submissions, name, template_type, id, redirect_url].hash
+      [expiration_interval, webhook_url, parent_folder_id, expire_after, allow_additional_properties, description, public_submissions, slack_webhook_url, path, public_web_form, editable_submissions, expire_submissions, name, template_type, id, locked, redirect_url].hash
     end
 
     # Builds the object from hash

@@ -25,7 +25,7 @@ describe 'PDFApi' do
     end
   end
 
-  let(:api_instance) { DocSpring::PDFApi.new }
+  let(:client) { DocSpring::PDFApi.new }
 
   after do
     # run after each test
@@ -40,7 +40,7 @@ describe 'PDFApi' do
   describe 'batch_generate_pdf v1 test' do
     it 'should work' do
       template_id = 'tpl_000000000000000001'
-      responses = api_instance.batch_generate_pdf_v1(template_id, [
+      responses = client.batch_generate_pdf_v1(template_id, [
         {
           data: {
             title: 'Test PDF',
@@ -67,7 +67,7 @@ describe 'PDFApi' do
   describe 'batch_generate_pdfs v2 test' do
     it 'should work' do
       template_id = 'tpl_000000000000000001'
-      response = api_instance.batch_generate_pdfs(
+      response = client.batch_generate_pdfs(
         metadata: { user_id: 123 },
         test: true,
         submissions: [
@@ -109,7 +109,7 @@ describe 'PDFApi' do
   describe 'get_submission_batch test' do
     it 'should get the batch including submissions' do
       submission_batch_id = 'sbb_000000000000000001'
-      batch = api_instance.get_submission_batch(submission_batch_id, include_submissions: true)
+      batch = client.get_submission_batch(submission_batch_id, include_submissions: true)
       expect(batch.id).to eq 'sbb_000000000000000001'
       expect(batch.total_count).to eq 2
       expect(batch.pending_count).to eq 0
@@ -120,10 +120,41 @@ describe 'PDFApi' do
 
     it 'should get the batch without submissions' do
       submission_batch_id = 'sbb_000000000000000001'
-      batch = api_instance.get_submission_batch(submission_batch_id)
+      batch = client.get_submission_batch(submission_batch_id)
       expect(batch.id).to eq 'sbb_000000000000000001'
       expect(batch.submissions).to be_nil
     end
+  end
+
+  it 'should add fields to a template' do
+    template_id = 'tpl_000000000000000001'
+
+    response = client.add_fields_to_template(
+      template_id,
+      fields: [
+        {
+          name: 'new_field1',
+          page: 1,
+          required: false,
+        },
+        {
+          name: 'new_field2',
+          type: 'number',
+          page: 1,
+          required: false,
+        },
+        {
+          name: 'new_field3',
+          type: 'date',
+          page: 1,
+          required: false,
+          x: 300,
+        },
+      ]
+    )
+    expect(response.status).to eq 'success'
+    expect(response.new_field_ids).to eq [3, 4, 5]
+    expect(response.new_field_ids[0].class).to eq Integer
   end
 
   # integration tests for combine_submissions
@@ -133,7 +164,7 @@ describe 'PDFApi' do
   # @return [CreateCombinedSubmissionResponse]
   describe 'combine_submissions test' do
     it 'should work' do
-      response = api_instance.combine_submissions(
+      response = client.combine_submissions(
         submission_ids: %w[sub_000000000000000001 sub_000000000000000002])
       expect(response.status).to eq 'success'
       expect(response.combined_submission.id).to start_with 'com_'
@@ -148,7 +179,7 @@ describe 'PDFApi' do
   describe 'create_data_request_token test' do
     it 'should work' do
       data_request_id = 'drq_000000000000000001' # String |
-      response = api_instance.create_data_request_token(data_request_id)
+      response = client.create_data_request_token(data_request_id)
       expect(response.status).to eq 'success'
       expect(response.token.id).to_not be_nil
       expect(response.token.secret).to_not be_nil
@@ -167,7 +198,7 @@ describe 'PDFApi' do
   describe 'expire_combined_submission test' do
     it 'should work' do
       combined_submission_id = 'com_000000000000000001'
-      combined_submission = api_instance.expire_combined_submission(combined_submission_id)
+      combined_submission = client.expire_combined_submission(combined_submission_id)
       expect(combined_submission.expired).to eq true
     end
   end
@@ -179,7 +210,7 @@ describe 'PDFApi' do
   describe 'expire_submission test' do
     it 'should work' do
       submission_id = 'sub_000000000000000001'
-      submission = api_instance.expire_submission(submission_id)
+      submission = client.expire_submission(submission_id)
       expect(submission.expired).to eq true
     end
   end
@@ -192,7 +223,7 @@ describe 'PDFApi' do
   describe 'generate_pdf test' do
     it 'should work' do
       template_id = 'tpl_000000000000000001'
-      response = api_instance.generate_pdf(template_id,
+      response = client.generate_pdf(template_id,
         data: {
           title: 'Test PDF',
           description: 'This PDF is great!',
@@ -213,7 +244,7 @@ describe 'PDFApi' do
   describe 'generate_pdf test with data_requests' do
     it 'should work' do
       template_id = 'tpl_000000000000000001'
-      response = api_instance.generate_pdf(template_id,
+      response = client.generate_pdf(template_id,
         data: {
           title: 'Test PDF',
         },
@@ -254,7 +285,7 @@ describe 'PDFApi' do
   describe 'get_combined_submission test' do
     it 'should work' do
       combined_submission_id = 'com_000000000000000001'
-      combined_submission = api_instance.get_combined_submission(combined_submission_id)
+      combined_submission = client.get_combined_submission(combined_submission_id)
       expect(combined_submission.id).to start_with 'com_'
     end
   end
@@ -266,7 +297,7 @@ describe 'PDFApi' do
   describe 'get_data_request test' do
     it 'should work' do
       data_request_id = 'drq_000000000000000001' # String |
-      data_request = api_instance.get_data_request(data_request_id)
+      data_request = client.get_data_request(data_request_id)
       expect(data_request.id).to start_with 'drq_'
       expect(data_request.order).to eq 1
       expect(data_request.name).to eq 'John Doe'
@@ -287,7 +318,7 @@ describe 'PDFApi' do
   describe 'update_data_request test' do
     it 'should work' do
       data_request_id = 'drq_000000000000000001' # String |
-      response = api_instance.update_data_request(
+      response = client.update_data_request(
         data_request_id,
         name: 'Harry Smith',
         email: 'hsmith@example.com',
@@ -323,7 +354,7 @@ describe 'PDFApi' do
   describe 'get_submission test' do
     it 'should work' do
       submission_id = 'sub_000000000000000001'
-      submission = api_instance.get_submission(submission_id)
+      submission = client.get_submission(submission_id)
       expect(submission.id).to start_with 'sub_'
     end
   end
@@ -340,7 +371,7 @@ describe 'PDFApi' do
         page: 1, # Integer | Default: 1
         per_page: 10 # Integer | Default: 50
       }
-      templates = api_instance.list_templates(opts)
+      templates = client.list_templates(opts)
       expect(templates.size).to eq 1
       expect(templates.first.id).to eq 'tpl_000000000000000002'
     end
@@ -359,7 +390,7 @@ describe 'PDFApi' do
         page: 2, # Integer | Default: 1
         per_page: 1 # Integer | Default: 50
       }
-      result = api_instance.list_templates(opts)
+      result = client.list_templates(opts)
       expect(result).to_not be_nil
     end
   end
@@ -370,7 +401,7 @@ describe 'PDFApi' do
   # @return [AuthenticationSuccessResponse]
   describe 'test_authentication test' do
     it 'should work' do
-      response = api_instance.test_authentication
+      response = client.test_authentication
       expect(response.status).to eq 'success'
     end
   end

@@ -19,6 +19,65 @@ module DocSpring
     def initialize(api_client = ApiClient.default)
       @api_client = api_client
     end
+    # Add new fields to a Template
+    # @param template_id 
+    # @param add_fields_data 
+    # @param [Hash] opts the optional parameters
+    # @return [AddFieldsTemplateResponse]
+    def add_fields_to_template(template_id, add_fields_data, opts = {})
+      data, _status_code, _headers = add_fields_to_template_with_http_info(template_id, add_fields_data, opts)
+      data
+    end
+
+    # Add new fields to a Template
+    # @param template_id 
+    # @param add_fields_data 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(AddFieldsTemplateResponse, Fixnum, Hash)>] AddFieldsTemplateResponse data, response status code and response headers
+    def add_fields_to_template_with_http_info(template_id, add_fields_data, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PDFApi.add_fields_to_template ...'
+      end
+      # verify the required parameter 'template_id' is set
+      if @api_client.config.client_side_validation && template_id.nil?
+        fail ArgumentError, "Missing the required parameter 'template_id' when calling PDFApi.add_fields_to_template"
+      end
+      # verify the required parameter 'add_fields_data' is set
+      if @api_client.config.client_side_validation && add_fields_data.nil?
+        fail ArgumentError, "Missing the required parameter 'add_fields_data' when calling PDFApi.add_fields_to_template"
+      end
+      # resource path
+      local_var_path = '/templates/{template_id}/add_fields'.sub('{' + 'template_id' + '}', template_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(add_fields_data)
+      auth_names = ['api_token_basic']
+      data, status_code, headers = @api_client.call_api(:PUT, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'AddFieldsTemplateResponse')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PDFApi#add_fields_to_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Generates multiple PDFs
     # @param template_id 
     # @param request_body 
@@ -395,25 +454,25 @@ module DocSpring
     end
 
     # Create a new HTML template
-    # @param create_template_data1 
+    # @param create_html_template_data 
     # @param [Hash] opts the optional parameters
     # @return [PendingTemplate]
-    def create_html_template(create_template_data1, opts = {})
-      data, _status_code, _headers = create_html_template_with_http_info(create_template_data1, opts)
+    def create_html_template(create_html_template_data, opts = {})
+      data, _status_code, _headers = create_html_template_with_http_info(create_html_template_data, opts)
       data
     end
 
     # Create a new HTML template
-    # @param create_template_data1 
+    # @param create_html_template_data 
     # @param [Hash] opts the optional parameters
     # @return [Array<(PendingTemplate, Fixnum, Hash)>] PendingTemplate data, response status code and response headers
-    def create_html_template_with_http_info(create_template_data1, opts = {})
+    def create_html_template_with_http_info(create_html_template_data, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PDFApi.create_html_template ...'
       end
-      # verify the required parameter 'create_template_data1' is set
-      if @api_client.config.client_side_validation && create_template_data1.nil?
-        fail ArgumentError, "Missing the required parameter 'create_template_data1' when calling PDFApi.create_html_template"
+      # verify the required parameter 'create_html_template_data' is set
+      if @api_client.config.client_side_validation && create_html_template_data.nil?
+        fail ArgumentError, "Missing the required parameter 'create_html_template_data' when calling PDFApi.create_html_template"
       end
       # resource path
       local_var_path = '/templates?desc=html'
@@ -432,7 +491,7 @@ module DocSpring
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(create_template_data1)
+      post_body = @api_client.object_to_http_body(create_html_template_data)
       auth_names = ['api_token_basic']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,
@@ -512,25 +571,25 @@ module DocSpring
     end
 
     # Create a new PDF template from a cached presign upload
-    # @param create_template_data 
+    # @param create_template_from_upload_data 
     # @param [Hash] opts the optional parameters
     # @return [PendingTemplate]
-    def create_pdf_template_from_upload(create_template_data, opts = {})
-      data, _status_code, _headers = create_pdf_template_from_upload_with_http_info(create_template_data, opts)
+    def create_pdf_template_from_upload(create_template_from_upload_data, opts = {})
+      data, _status_code, _headers = create_pdf_template_from_upload_with_http_info(create_template_from_upload_data, opts)
       data
     end
 
     # Create a new PDF template from a cached presign upload
-    # @param create_template_data 
+    # @param create_template_from_upload_data 
     # @param [Hash] opts the optional parameters
     # @return [Array<(PendingTemplate, Fixnum, Hash)>] PendingTemplate data, response status code and response headers
-    def create_pdf_template_from_upload_with_http_info(create_template_data, opts = {})
+    def create_pdf_template_from_upload_with_http_info(create_template_from_upload_data, opts = {})
       if @api_client.config.debugging
         @api_client.config.logger.debug 'Calling API: PDFApi.create_pdf_template_from_upload ...'
       end
-      # verify the required parameter 'create_template_data' is set
-      if @api_client.config.client_side_validation && create_template_data.nil?
-        fail ArgumentError, "Missing the required parameter 'create_template_data' when calling PDFApi.create_pdf_template_from_upload"
+      # verify the required parameter 'create_template_from_upload_data' is set
+      if @api_client.config.client_side_validation && create_template_from_upload_data.nil?
+        fail ArgumentError, "Missing the required parameter 'create_template_from_upload_data' when calling PDFApi.create_pdf_template_from_upload"
       end
       # resource path
       local_var_path = '/templates?desc=cached_upload'
@@ -549,7 +608,7 @@ module DocSpring
       form_params = {}
 
       # http body (model)
-      post_body = @api_client.object_to_http_body(create_template_data)
+      post_body = @api_client.object_to_http_body(create_template_from_upload_data)
       auth_names = ['api_token_basic']
       data, status_code, headers = @api_client.call_api(:POST, local_var_path,
         :header_params => header_params,

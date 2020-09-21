@@ -13,20 +13,20 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module DocSpring
-  class CreateTemplateData
-    attr_accessor :template
+  class AddFieldsData
+    attr_accessor :fields
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'template' => :'template'
+        :'fields' => :'fields'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'template' => :'TemplatesdesccachedUploadTemplate'
+        :'fields' => :'Array<TemplatestemplateIdaddFieldsFields>'
       }
     end
 
@@ -38,8 +38,10 @@ module DocSpring
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'template')
-        self.template = attributes[:'template']
+      if attributes.has_key?(:'fields')
+        if (value = attributes[:'fields']).is_a?(Array)
+          self.fields = value
+        end
       end
     end
 
@@ -47,8 +49,8 @@ module DocSpring
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @template.nil?
-        invalid_properties.push('invalid value for "template", template cannot be nil.')
+      if @fields.nil?
+        invalid_properties.push('invalid value for "fields", fields cannot be nil.')
       end
 
       invalid_properties
@@ -57,7 +59,7 @@ module DocSpring
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @template.nil?
+      return false if @fields.nil?
       true
     end
 
@@ -66,7 +68,7 @@ module DocSpring
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          template == o.template
+          fields == o.fields
     end
 
     # @see the `==` method
@@ -78,7 +80,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [template].hash
+      [fields].hash
     end
 
     # Builds the object from hash

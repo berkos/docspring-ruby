@@ -1,4 +1,4 @@
-# DocSpring::TemplatestemplateIdTemplate
+# DocSpring::TemplateData
 
 ## Properties
 Name | Type | Description | Notes

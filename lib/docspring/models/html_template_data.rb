@@ -13,7 +13,7 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module DocSpring
-  class TemplatesdesccachedUploadTemplate
+  class HtmlTemplateData
     attr_accessor :expiration_interval
 
     attr_accessor :webhook_url
@@ -23,8 +23,6 @@ module DocSpring
     attr_accessor :expire_after
 
     attr_accessor :allow_additional_properties
-
-    attr_accessor :document
 
     attr_accessor :description
 
@@ -80,7 +78,6 @@ module DocSpring
         :'scss' => :'scss',
         :'expire_after' => :'expire_after',
         :'allow_additional_properties' => :'allow_additional_properties',
-        :'document' => :'document',
         :'description' => :'description',
         :'public_submissions' => :'public_submissions',
         :'slack_webhook_url' => :'slack_webhook_url',
@@ -104,7 +101,6 @@ module DocSpring
         :'scss' => :'String',
         :'expire_after' => :'Float',
         :'allow_additional_properties' => :'BOOLEAN',
-        :'document' => :'TemplatesdesccachedUploadTemplateDocument',
         :'description' => :'String',
         :'public_submissions' => :'BOOLEAN',
         :'slack_webhook_url' => :'String',
@@ -146,10 +142,6 @@ module DocSpring
 
       if attributes.has_key?(:'allow_additional_properties')
         self.allow_additional_properties = attributes[:'allow_additional_properties']
-      end
-
-      if attributes.has_key?(:'document')
-        self.document = attributes[:'document']
       end
 
       if attributes.has_key?(:'description')
@@ -248,7 +240,6 @@ module DocSpring
           scss == o.scss &&
           expire_after == o.expire_after &&
           allow_additional_properties == o.allow_additional_properties &&
-          document == o.document &&
           description == o.description &&
           public_submissions == o.public_submissions &&
           slack_webhook_url == o.slack_webhook_url &&
@@ -272,7 +263,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [expiration_interval, webhook_url, scss, expire_after, allow_additional_properties, document, description, public_submissions, slack_webhook_url, header_html, public_web_form, editable_submissions, expire_submissions, name, html, footer_html, template_type, redirect_url].hash
+      [expiration_interval, webhook_url, scss, expire_after, allow_additional_properties, description, public_submissions, slack_webhook_url, header_html, public_web_form, editable_submissions, expire_submissions, name, html, footer_html, template_type, redirect_url].hash
     end
 
     # Builds the object from hash

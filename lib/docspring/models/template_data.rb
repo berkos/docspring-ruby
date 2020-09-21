@@ -13,7 +13,7 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module DocSpring
-  class TemplatestemplateIdTemplate
+  class TemplateData
     attr_accessor :expiration_interval
 
     attr_accessor :webhook_url

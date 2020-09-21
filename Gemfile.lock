@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    docspring (1.1.0)
+    docspring (1.2.0)
       ffi (~> 1.0, >= 1.9.24)
       json (>= 1.8)
       typhoeus (~> 1.0, >= 1.0.1)

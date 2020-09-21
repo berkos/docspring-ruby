@@ -13,12 +13,12 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module DocSpring
-  class TemplatesdesccachedUploadTemplateDocument
-    attr_accessor :metadata
+  class UploadTemplateDataDocumentMetadata
+    attr_accessor :filename
 
-    attr_accessor :id
+    attr_accessor :size
 
-    attr_accessor :storage
+    attr_accessor :mime_type
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -45,18 +45,18 @@ module DocSpring
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'metadata' => :'metadata',
-        :'id' => :'id',
-        :'storage' => :'storage'
+        :'filename' => :'filename',
+        :'size' => :'size',
+        :'mime_type' => :'mime_type'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'metadata' => :'TemplatesdesccachedUploadTemplateDocumentMetadata',
-        :'id' => :'String',
-        :'storage' => :'String'
+        :'filename' => :'String',
+        :'size' => :'Integer',
+        :'mime_type' => :'String'
       }
     end
 
@@ -68,16 +68,16 @@ module DocSpring
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'metadata')
-        self.metadata = attributes[:'metadata']
+      if attributes.has_key?(:'filename')
+        self.filename = attributes[:'filename']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
+      if attributes.has_key?(:'size')
+        self.size = attributes[:'size']
       end
 
-      if attributes.has_key?(:'storage')
-        self.storage = attributes[:'storage']
+      if attributes.has_key?(:'mime_type')
+        self.mime_type = attributes[:'mime_type']
       end
     end
 
@@ -91,19 +91,19 @@ module DocSpring
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      storage_validator = EnumAttributeValidator.new('String', ['cache'])
-      return false unless storage_validator.valid?(@storage)
+      mime_type_validator = EnumAttributeValidator.new('String', ['application/pdf'])
+      return false unless mime_type_validator.valid?(@mime_type)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] storage Object to be assigned
-    def storage=(storage)
-      validator = EnumAttributeValidator.new('String', ['cache'])
-      unless validator.valid?(storage)
-        fail ArgumentError, 'invalid value for "storage", must be one of #{validator.allowable_values}.'
+    # @param [Object] mime_type Object to be assigned
+    def mime_type=(mime_type)
+      validator = EnumAttributeValidator.new('String', ['application/pdf'])
+      unless validator.valid?(mime_type)
+        fail ArgumentError, 'invalid value for "mime_type", must be one of #{validator.allowable_values}.'
       end
-      @storage = storage
+      @mime_type = mime_type
     end
 
     # Checks equality by comparing each attribute.
@@ -111,9 +111,9 @@ module DocSpring
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          metadata == o.metadata &&
-          id == o.id &&
-          storage == o.storage
+          filename == o.filename &&
+          size == o.size &&
+          mime_type == o.mime_type
     end
 
     # @see the `==` method
@@ -125,7 +125,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [metadata, id, storage].hash
+      [filename, size, mime_type].hash
     end
 
     # Builds the object from hash

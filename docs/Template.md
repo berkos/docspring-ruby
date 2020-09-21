@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **template_type** | **String** |  | [optional] 
 **id** | **String** |  | [optional] 
 **page_dimensions** | **Array&lt;Array&lt;Float&gt;&gt;** |  | [optional] 
+**locked** | **BOOLEAN** |  | [optional] 
 **redirect_url** | **String** |  | [optional] 
 **document_url** | **String** |  | [optional] 
 

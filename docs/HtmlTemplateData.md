@@ -1,4 +1,4 @@
-# DocSpring::TemplatesdesccachedUploadTemplate
+# DocSpring::HtmlTemplateData
 
 ## Properties
 Name | Type | Description | Notes
@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **scss** | **String** |  | [optional] 
 **expire_after** | **Float** |  | [optional] 
 **allow_additional_properties** | **BOOLEAN** |  | [optional] 
-**document** | [**TemplatesdesccachedUploadTemplateDocument**](TemplatesdesccachedUploadTemplateDocument.md) |  | [optional] 
 **description** | **String** |  | [optional] 
 **public_submissions** | **BOOLEAN** |  | [optional] 
 **slack_webhook_url** | **String** |  | [optional] 

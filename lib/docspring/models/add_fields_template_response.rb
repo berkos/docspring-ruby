@@ -13,12 +13,12 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module DocSpring
-  class TemplatesdesccachedUploadTemplateDocumentMetadata
-    attr_accessor :filename
+  class AddFieldsTemplateResponse
+    attr_accessor :new_field_ids
 
-    attr_accessor :size
+    attr_accessor :errors
 
-    attr_accessor :mime_type
+    attr_accessor :status
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -45,18 +45,18 @@ module DocSpring
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'filename' => :'filename',
-        :'size' => :'size',
-        :'mime_type' => :'mime_type'
+        :'new_field_ids' => :'new_field_ids',
+        :'errors' => :'errors',
+        :'status' => :'status'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'filename' => :'String',
-        :'size' => :'Integer',
-        :'mime_type' => :'String'
+        :'new_field_ids' => :'Array<Integer>',
+        :'errors' => :'Array<String>',
+        :'status' => :'String'
       }
     end
 
@@ -68,16 +68,20 @@ module DocSpring
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'filename')
-        self.filename = attributes[:'filename']
+      if attributes.has_key?(:'new_field_ids')
+        if (value = attributes[:'new_field_ids']).is_a?(Array)
+          self.new_field_ids = value
+        end
       end
 
-      if attributes.has_key?(:'size')
-        self.size = attributes[:'size']
+      if attributes.has_key?(:'errors')
+        if (value = attributes[:'errors']).is_a?(Array)
+          self.errors = value
+        end
       end
 
-      if attributes.has_key?(:'mime_type')
-        self.mime_type = attributes[:'mime_type']
+      if attributes.has_key?(:'status')
+        self.status = attributes[:'status']
       end
     end
 
@@ -91,19 +95,19 @@ module DocSpring
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      mime_type_validator = EnumAttributeValidator.new('String', ['application/pdf'])
-      return false unless mime_type_validator.valid?(@mime_type)
+      status_validator = EnumAttributeValidator.new('String', ['success', 'error'])
+      return false unless status_validator.valid?(@status)
       true
     end
 
     # Custom attribute writer method checking allowed values (enum).
-    # @param [Object] mime_type Object to be assigned
-    def mime_type=(mime_type)
-      validator = EnumAttributeValidator.new('String', ['application/pdf'])
-      unless validator.valid?(mime_type)
-        fail ArgumentError, 'invalid value for "mime_type", must be one of #{validator.allowable_values}.'
+    # @param [Object] status Object to be assigned
+    def status=(status)
+      validator = EnumAttributeValidator.new('String', ['success', 'error'])
+      unless validator.valid?(status)
+        fail ArgumentError, 'invalid value for "status", must be one of #{validator.allowable_values}.'
       end
-      @mime_type = mime_type
+      @status = status
     end
 
     # Checks equality by comparing each attribute.
@@ -111,9 +115,9 @@ module DocSpring
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          filename == o.filename &&
-          size == o.size &&
-          mime_type == o.mime_type
+          new_field_ids == o.new_field_ids &&
+          errors == o.errors &&
+          status == o.status
     end
 
     # @see the `==` method
@@ -125,7 +129,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [filename, size, mime_type].hash
+      [new_field_ids, errors, status].hash
     end
 
     # Builds the object from hash

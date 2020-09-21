@@ -38,6 +38,20 @@ describe 'PDFApi' do
     end
   end
 
+  # integration tests for add_fields_to_template
+  # Add new fields to a Template
+  # @param template_id 
+  # @param add_fields_data 
+  # @param [Hash] opts the optional parameters
+  # @return [AddFieldsTemplateResponse]
+  describe 'add_fields_to_template test' do
+    it 'should work' do
+      template_id = 'tpl_000000000000000002' # String | 
+      add_fields_data = DocSpring::AddFieldsData.new # AddFieldsData | 
+      result = api_instance.add_fields_to_template(template_id, add_fields_data)
+      expect(result).to_not be_nil
+    end
+  end
   # integration tests for batch_generate_pdf_v1
   # Generates multiple PDFs
   # @param template_id 
@@ -126,13 +140,13 @@ describe 'PDFApi' do
   end
   # integration tests for create_html_template
   # Create a new HTML template
-  # @param create_template_data1 
+  # @param create_html_template_data 
   # @param [Hash] opts the optional parameters
   # @return [PendingTemplate]
   describe 'create_html_template test' do
     it 'should work' do
-      create_template_data1 = DocSpring::CreateTemplateData1.new # CreateTemplateData1 | 
-      result = api_instance.create_html_template(create_template_data1)
+      create_html_template_data = DocSpring::CreateHtmlTemplateData.new # CreateHtmlTemplateData | 
+      result = api_instance.create_html_template(create_html_template_data)
       expect(result).to_not be_nil
     end
   end
@@ -156,13 +170,13 @@ describe 'PDFApi' do
   end
   # integration tests for create_pdf_template_from_upload
   # Create a new PDF template from a cached presign upload
-  # @param create_template_data 
+  # @param create_template_from_upload_data 
   # @param [Hash] opts the optional parameters
   # @return [PendingTemplate]
   describe 'create_pdf_template_from_upload test' do
     it 'should work' do
-      create_template_data = DocSpring::CreateTemplateData.new # CreateTemplateData | 
-      result = api_instance.create_pdf_template_from_upload(create_template_data)
+      create_template_from_upload_data = DocSpring::CreateTemplateFromUploadData.new # CreateTemplateFromUploadData | 
+      result = api_instance.create_pdf_template_from_upload(create_template_from_upload_data)
       expect(result).to_not be_nil
     end
   end

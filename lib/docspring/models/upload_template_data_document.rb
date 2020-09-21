@@ -13,20 +13,50 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module DocSpring
-  class UpdateTemplateData
-    attr_accessor :template
+  class UploadTemplateDataDocument
+    attr_accessor :metadata
+
+    attr_accessor :id
+
+    attr_accessor :storage
+
+    class EnumAttributeValidator
+      attr_reader :datatype
+      attr_reader :allowable_values
+
+      def initialize(datatype, allowable_values)
+        @allowable_values = allowable_values.map do |value|
+          case datatype.to_s
+          when /Integer/i
+            value.to_i
+          when /Float/i
+            value.to_f
+          else
+            value
+          end
+        end
+      end
+
+      def valid?(value)
+        !value || allowable_values.include?(value)
+      end
+    end
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
-        :'template' => :'template'
+        :'metadata' => :'metadata',
+        :'id' => :'id',
+        :'storage' => :'storage'
       }
     end
 
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'template' => :'TemplateData'
+        :'metadata' => :'UploadTemplateDataDocumentMetadata',
+        :'id' => :'String',
+        :'storage' => :'String'
       }
     end
 
@@ -38,8 +68,16 @@ module DocSpring
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
 
-      if attributes.has_key?(:'template')
-        self.template = attributes[:'template']
+      if attributes.has_key?(:'metadata')
+        self.metadata = attributes[:'metadata']
+      end
+
+      if attributes.has_key?(:'id')
+        self.id = attributes[:'id']
+      end
+
+      if attributes.has_key?(:'storage')
+        self.storage = attributes[:'storage']
       end
     end
 
@@ -47,18 +85,25 @@ module DocSpring
     # @return Array for valid properties with the reasons
     def list_invalid_properties
       invalid_properties = Array.new
-      if @template.nil?
-        invalid_properties.push('invalid value for "template", template cannot be nil.')
-      end
-
       invalid_properties
     end
 
     # Check to see if the all the properties in the model are valid
     # @return true if the model is valid
     def valid?
-      return false if @template.nil?
+      storage_validator = EnumAttributeValidator.new('String', ['cache'])
+      return false unless storage_validator.valid?(@storage)
       true
+    end
+
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] storage Object to be assigned
+    def storage=(storage)
+      validator = EnumAttributeValidator.new('String', ['cache'])
+      unless validator.valid?(storage)
+        fail ArgumentError, 'invalid value for "storage", must be one of #{validator.allowable_values}.'
+      end
+      @storage = storage
     end
 
     # Checks equality by comparing each attribute.
@@ -66,7 +111,9 @@ module DocSpring
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
-          template == o.template
+          metadata == o.metadata &&
+          id == o.id &&
+          storage == o.storage
     end
 
     # @see the `==` method
@@ -78,7 +125,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [template].hash
+      [metadata, id, storage].hash
     end
 
     # Builds the object from hash

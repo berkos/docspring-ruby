@@ -13,16 +13,18 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module DocSpring
-  class Template
+  class UploadTemplateData
     attr_accessor :expiration_interval
 
     attr_accessor :webhook_url
 
-    attr_accessor :parent_folder_id
+    attr_accessor :scss
 
     attr_accessor :expire_after
 
     attr_accessor :allow_additional_properties
+
+    attr_accessor :document
 
     attr_accessor :description
 
@@ -30,7 +32,7 @@ module DocSpring
 
     attr_accessor :slack_webhook_url
 
-    attr_accessor :path
+    attr_accessor :header_html
 
     attr_accessor :public_web_form
 
@@ -40,19 +42,13 @@ module DocSpring
 
     attr_accessor :name
 
-    attr_accessor :permanent_document_url
+    attr_accessor :html
+
+    attr_accessor :footer_html
 
     attr_accessor :template_type
 
-    attr_accessor :id
-
-    attr_accessor :page_dimensions
-
-    attr_accessor :locked
-
     attr_accessor :redirect_url
-
-    attr_accessor :document_url
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -81,24 +77,22 @@ module DocSpring
       {
         :'expiration_interval' => :'expiration_interval',
         :'webhook_url' => :'webhook_url',
-        :'parent_folder_id' => :'parent_folder_id',
+        :'scss' => :'scss',
         :'expire_after' => :'expire_after',
         :'allow_additional_properties' => :'allow_additional_properties',
+        :'document' => :'document',
         :'description' => :'description',
         :'public_submissions' => :'public_submissions',
         :'slack_webhook_url' => :'slack_webhook_url',
-        :'path' => :'path',
+        :'header_html' => :'header_html',
         :'public_web_form' => :'public_web_form',
         :'editable_submissions' => :'editable_submissions',
         :'expire_submissions' => :'expire_submissions',
         :'name' => :'name',
-        :'permanent_document_url' => :'permanent_document_url',
+        :'html' => :'html',
+        :'footer_html' => :'footer_html',
         :'template_type' => :'template_type',
-        :'id' => :'id',
-        :'page_dimensions' => :'page_dimensions',
-        :'locked' => :'locked',
-        :'redirect_url' => :'redirect_url',
-        :'document_url' => :'document_url'
+        :'redirect_url' => :'redirect_url'
       }
     end
 
@@ -107,24 +101,22 @@ module DocSpring
       {
         :'expiration_interval' => :'String',
         :'webhook_url' => :'String',
-        :'parent_folder_id' => :'String',
+        :'scss' => :'String',
         :'expire_after' => :'Float',
         :'allow_additional_properties' => :'BOOLEAN',
+        :'document' => :'UploadTemplateDataDocument',
         :'description' => :'String',
         :'public_submissions' => :'BOOLEAN',
         :'slack_webhook_url' => :'String',
-        :'path' => :'String',
+        :'header_html' => :'String',
         :'public_web_form' => :'BOOLEAN',
         :'editable_submissions' => :'BOOLEAN',
         :'expire_submissions' => :'BOOLEAN',
         :'name' => :'String',
-        :'permanent_document_url' => :'String',
+        :'html' => :'String',
+        :'footer_html' => :'String',
         :'template_type' => :'String',
-        :'id' => :'String',
-        :'page_dimensions' => :'Array<Array<Float>>',
-        :'locked' => :'BOOLEAN',
-        :'redirect_url' => :'String',
-        :'document_url' => :'String'
+        :'redirect_url' => :'String'
       }
     end
 
@@ -144,8 +136,8 @@ module DocSpring
         self.webhook_url = attributes[:'webhook_url']
       end
 
-      if attributes.has_key?(:'parent_folder_id')
-        self.parent_folder_id = attributes[:'parent_folder_id']
+      if attributes.has_key?(:'scss')
+        self.scss = attributes[:'scss']
       end
 
       if attributes.has_key?(:'expire_after')
@@ -154,6 +146,10 @@ module DocSpring
 
       if attributes.has_key?(:'allow_additional_properties')
         self.allow_additional_properties = attributes[:'allow_additional_properties']
+      end
+
+      if attributes.has_key?(:'document')
+        self.document = attributes[:'document']
       end
 
       if attributes.has_key?(:'description')
@@ -168,8 +164,8 @@ module DocSpring
         self.slack_webhook_url = attributes[:'slack_webhook_url']
       end
 
-      if attributes.has_key?(:'path')
-        self.path = attributes[:'path']
+      if attributes.has_key?(:'header_html')
+        self.header_html = attributes[:'header_html']
       end
 
       if attributes.has_key?(:'public_web_form')
@@ -188,34 +184,20 @@ module DocSpring
         self.name = attributes[:'name']
       end
 
-      if attributes.has_key?(:'permanent_document_url')
-        self.permanent_document_url = attributes[:'permanent_document_url']
+      if attributes.has_key?(:'html')
+        self.html = attributes[:'html']
+      end
+
+      if attributes.has_key?(:'footer_html')
+        self.footer_html = attributes[:'footer_html']
       end
 
       if attributes.has_key?(:'template_type')
         self.template_type = attributes[:'template_type']
       end
 
-      if attributes.has_key?(:'id')
-        self.id = attributes[:'id']
-      end
-
-      if attributes.has_key?(:'page_dimensions')
-        if (value = attributes[:'page_dimensions']).is_a?(Array)
-          self.page_dimensions = value
-        end
-      end
-
-      if attributes.has_key?(:'locked')
-        self.locked = attributes[:'locked']
-      end
-
       if attributes.has_key?(:'redirect_url')
         self.redirect_url = attributes[:'redirect_url']
-      end
-
-      if attributes.has_key?(:'document_url')
-        self.document_url = attributes[:'document_url']
       end
     end
 
@@ -231,6 +213,8 @@ module DocSpring
     def valid?
       expiration_interval_validator = EnumAttributeValidator.new('String', ['minutes', 'hours', 'days'])
       return false unless expiration_interval_validator.valid?(@expiration_interval)
+      template_type_validator = EnumAttributeValidator.new('String', ['pdf', 'html'])
+      return false unless template_type_validator.valid?(@template_type)
       true
     end
 
@@ -244,6 +228,16 @@ module DocSpring
       @expiration_interval = expiration_interval
     end
 
+    # Custom attribute writer method checking allowed values (enum).
+    # @param [Object] template_type Object to be assigned
+    def template_type=(template_type)
+      validator = EnumAttributeValidator.new('String', ['pdf', 'html'])
+      unless validator.valid?(template_type)
+        fail ArgumentError, 'invalid value for "template_type", must be one of #{validator.allowable_values}.'
+      end
+      @template_type = template_type
+    end
+
     # Checks equality by comparing each attribute.
     # @param [Object] Object to be compared
     def ==(o)
@@ -251,24 +245,22 @@ module DocSpring
       self.class == o.class &&
           expiration_interval == o.expiration_interval &&
           webhook_url == o.webhook_url &&
-          parent_folder_id == o.parent_folder_id &&
+          scss == o.scss &&
           expire_after == o.expire_after &&
           allow_additional_properties == o.allow_additional_properties &&
+          document == o.document &&
           description == o.description &&
           public_submissions == o.public_submissions &&
           slack_webhook_url == o.slack_webhook_url &&
-          path == o.path &&
+          header_html == o.header_html &&
           public_web_form == o.public_web_form &&
           editable_submissions == o.editable_submissions &&
           expire_submissions == o.expire_submissions &&
           name == o.name &&
-          permanent_document_url == o.permanent_document_url &&
+          html == o.html &&
+          footer_html == o.footer_html &&
           template_type == o.template_type &&
-          id == o.id &&
-          page_dimensions == o.page_dimensions &&
-          locked == o.locked &&
-          redirect_url == o.redirect_url &&
-          document_url == o.document_url
+          redirect_url == o.redirect_url
     end
 
     # @see the `==` method
@@ -280,7 +272,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [expiration_interval, webhook_url, parent_folder_id, expire_after, allow_additional_properties, description, public_submissions, slack_webhook_url, path, public_web_form, editable_submissions, expire_submissions, name, permanent_document_url, template_type, id, page_dimensions, locked, redirect_url, document_url].hash
+      [expiration_interval, webhook_url, scss, expire_after, allow_additional_properties, document, description, public_submissions, slack_webhook_url, header_html, public_web_form, editable_submissions, expire_submissions, name, html, footer_html, template_type, redirect_url].hash
     end
 
     # Builds the object from hash

@@ -13,7 +13,7 @@ OpenAPI Generator version: 3.3.0-SNAPSHOT
 require 'date'
 
 module DocSpring
-  class CreateTemplateData1
+  class CreateHtmlTemplateData
     attr_accessor :template
 
     # Attribute mapping from ruby-style variable name to JSON key.
@@ -26,7 +26,7 @@ module DocSpring
     # Attribute type mapping.
     def self.openapi_types
       {
-        :'template' => :'TemplatesdesccachedUploadTemplate'
+        :'template' => :'HtmlTemplateData'
       }
     end
 
