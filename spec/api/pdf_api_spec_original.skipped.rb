@@ -274,7 +274,7 @@ describe 'PDFApi' do
     it 'should work' do
       submission_id = 'sub_000000000000000001' # String | 
       opts = {
-        include_data: false # BOOLEAN | 
+        include_data: true # BOOLEAN | 
       }
       result = api_instance.get_submission(submission_id, opts)
       expect(result).to_not be_nil

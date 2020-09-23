@@ -945,7 +945,7 @@ end
 api_instance = DocSpring::PDFApi.new
 submission_id = 'sub_000000000000000001' # String | 
 opts = {
-  include_data: false # BOOLEAN | 
+  include_data: true # BOOLEAN | 
 }
 
 begin

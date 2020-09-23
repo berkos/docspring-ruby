@@ -30,6 +30,8 @@ module DocSpring
 
     attr_accessor :state
 
+    attr_accessor :data
+
     attr_accessor :metadata
 
     attr_accessor :truncated_text
@@ -45,6 +47,10 @@ module DocSpring
     attr_accessor :data_requests
 
     attr_accessor :actions
+
+    attr_accessor :source
+
+    attr_accessor :referrer
 
     class EnumAttributeValidator
       attr_reader :datatype
@@ -79,6 +85,7 @@ module DocSpring
         :'expires_at' => :'expires_at',
         :'processed_at' => :'processed_at',
         :'state' => :'state',
+        :'data' => :'data',
         :'metadata' => :'metadata',
         :'truncated_text' => :'truncated_text',
         :'pdf_hash' => :'pdf_hash',
@@ -86,7 +93,9 @@ module DocSpring
         :'permanent_download_url' => :'permanent_download_url',
         :'batch_id' => :'batch_id',
         :'data_requests' => :'data_requests',
-        :'actions' => :'actions'
+        :'actions' => :'actions',
+        :'source' => :'source',
+        :'referrer' => :'referrer'
       }
     end
 
@@ -101,6 +110,7 @@ module DocSpring
         :'expires_at' => :'String',
         :'processed_at' => :'String',
         :'state' => :'String',
+        :'data' => :'Object',
         :'metadata' => :'Object',
         :'truncated_text' => :'Object',
         :'pdf_hash' => :'String',
@@ -108,7 +118,9 @@ module DocSpring
         :'permanent_download_url' => :'String',
         :'batch_id' => :'String',
         :'data_requests' => :'Array<SubmissionDataRequest>',
-        :'actions' => :'Array<SubmissionAction>'
+        :'actions' => :'Array<SubmissionAction>',
+        :'source' => :'String',
+        :'referrer' => :'String'
       }
     end
 
@@ -152,6 +164,10 @@ module DocSpring
         self.state = attributes[:'state']
       end
 
+      if attributes.has_key?(:'data')
+        self.data = attributes[:'data']
+      end
+
       if attributes.has_key?(:'metadata')
         self.metadata = attributes[:'metadata']
       end
@@ -186,6 +202,14 @@ module DocSpring
         if (value = attributes[:'actions']).is_a?(Array)
           self.actions = value
         end
+      end
+
+      if attributes.has_key?(:'source')
+        self.source = attributes[:'source']
+      end
+
+      if attributes.has_key?(:'referrer')
+        self.referrer = attributes[:'referrer']
       end
     end
 
@@ -247,6 +271,7 @@ module DocSpring
           expires_at == o.expires_at &&
           processed_at == o.processed_at &&
           state == o.state &&
+          data == o.data &&
           metadata == o.metadata &&
           truncated_text == o.truncated_text &&
           pdf_hash == o.pdf_hash &&
@@ -254,7 +279,9 @@ module DocSpring
           permanent_download_url == o.permanent_download_url &&
           batch_id == o.batch_id &&
           data_requests == o.data_requests &&
-          actions == o.actions
+          actions == o.actions &&
+          source == o.source &&
+          referrer == o.referrer
     end
 
     # @see the `==` method
@@ -266,7 +293,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, template_id, test, editable, expired, expires_at, processed_at, state, metadata, truncated_text, pdf_hash, download_url, permanent_download_url, batch_id, data_requests, actions].hash
+      [id, template_id, test, editable, expired, expires_at, processed_at, state, data, metadata, truncated_text, pdf_hash, download_url, permanent_download_url, batch_id, data_requests, actions, source, referrer].hash
     end
 
     # Builds the object from hash

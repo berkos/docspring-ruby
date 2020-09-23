@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **expires_at** | **String** |  | [optional] 
 **processed_at** | **String** |  | [optional] 
 **state** | **String** |  | 
+**data** | **Object** |  | [optional] 
 **metadata** | **Object** |  | [optional] 
 **truncated_text** | **Object** |  | [optional] 
 **pdf_hash** | **String** |  | [optional] 
@@ -19,5 +20,7 @@ Name | Type | Description | Notes
 **batch_id** | **String** |  | [optional] 
 **data_requests** | [**Array&lt;SubmissionDataRequest&gt;**](SubmissionDataRequest.md) |  | [optional] 
 **actions** | [**Array&lt;SubmissionAction&gt;**](SubmissionAction.md) |  | [optional] 
+**source** | **String** |  | [optional] 
+**referrer** | **String** |  | [optional] 
 
 
