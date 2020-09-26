@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.name        = "docspring"
   s.version     = DocSpring::VERSION
   s.platform    = Gem::Platform::RUBY
-  s.authors     = ["Form Applications, Inc."]
+  s.authors     = ["DocSpring"]
   s.email       = ["support@docspring.com"]
   s.homepage    = "https://github.com/DocSpring/docspring-ruby"
   s.summary     = "DocSpring API Client"

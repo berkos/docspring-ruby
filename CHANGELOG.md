@@ -1,3 +1,7 @@
+### 1.3.1 [September 27, 2020]
+
+- Changed gem author to DocSpring
+
 ### 1.3.0 [September 26, 2020]
 
 - Updated OpenAPI Generator to v3.3.0
