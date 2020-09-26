@@ -4,8 +4,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **metadata** | **Object** |  | [optional] 
-**test** | **BOOLEAN** |  | [optional] 
-**template_id** | **String** |  | [optional] 
 **submissions** | [**Array&lt;SubmissionDataBatchRequest&gt;**](SubmissionDataBatchRequest.md) |  | 
+**template_id** | **String** |  | [optional] 
+**test** | **BOOLEAN** |  | [optional] 
 
 

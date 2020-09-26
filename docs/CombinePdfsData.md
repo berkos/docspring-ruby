@@ -3,10 +3,10 @@
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**test** | **BOOLEAN** |  | [optional] 
-**source_pdfs** | **Array&lt;Object&gt;** |  | 
-**metadata** | **Object** |  | [optional] 
-**expires_in** | **Integer** |  | [optional] 
 **delete_custom_files** | **BOOLEAN** |  | [optional] 
+**expires_in** | **Integer** |  | [optional] 
+**metadata** | **Object** |  | [optional] 
+**source_pdfs** | **Array&lt;Object&gt;** |  | 
+**test** | **BOOLEAN** |  | [optional] 
 
 
