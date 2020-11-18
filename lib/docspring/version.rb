@@ -11,5 +11,5 @@ OpenAPI Generator version: 3.3.0
 =end
 
 module DocSpring
-  VERSION = '1.3.1'
+  VERSION = '1.3.2'
 end

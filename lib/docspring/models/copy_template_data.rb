@@ -13,12 +13,15 @@ OpenAPI Generator version: 3.3.0
 require 'date'
 
 module DocSpring
-  class MoveTemplateData
+  class CopyTemplateData
+    attr_accessor :name
+
     attr_accessor :parent_folder_id
 
     # Attribute mapping from ruby-style variable name to JSON key.
     def self.attribute_map
       {
+        :'name' => :'name',
         :'parent_folder_id' => :'parent_folder_id'
       }
     end
@@ -26,6 +29,7 @@ module DocSpring
     # Attribute type mapping.
     def self.openapi_types
       {
+        :'name' => :'String',
         :'parent_folder_id' => :'String'
       }
     end
@@ -37,6 +41,10 @@ module DocSpring
 
       # convert string to symbol for hash key
       attributes = attributes.each_with_object({}) { |(k, v), h| h[k.to_sym] = v }
+
+      if attributes.has_key?(:'name')
+        self.name = attributes[:'name']
+      end
 
       if attributes.has_key?(:'parent_folder_id')
         self.parent_folder_id = attributes[:'parent_folder_id']
@@ -66,6 +74,7 @@ module DocSpring
     def ==(o)
       return true if self.equal?(o)
       self.class == o.class &&
+          name == o.name &&
           parent_folder_id == o.parent_folder_id
     end
 
@@ -78,7 +87,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [parent_folder_id].hash
+      [name, parent_folder_id].hash
     end
 
     # Builds the object from hash

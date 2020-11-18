@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **name** | **String** |  | 
 **email** | **String** |  | 
 **order** | **Integer** |  | 
+**sort_order** | **Integer** |  | 
 **fields** | **Array&lt;String&gt;** |  | 
 **metadata** | **Object** |  | 
 **state** | **String** |  | 

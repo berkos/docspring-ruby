@@ -9,6 +9,7 @@ Method | HTTP request | Description
 [**batch_generate_pdfs**](PDFApi.md#batch_generate_pdfs) | **POST** /submissions/batches | Generates multiple PDFs
 [**combine_pdfs**](PDFApi.md#combine_pdfs) | **POST** /combined_submissions?v&#x3D;2 | Merge submission PDFs, template PDFs, or custom files
 [**combine_submissions**](PDFApi.md#combine_submissions) | **POST** /combined_submissions | Merge generated PDFs together
+[**copy_template**](PDFApi.md#copy_template) | **POST** /templates/{template_id}/copy | Copy a Template
 [**create_custom_file_from_upload**](PDFApi.md#create_custom_file_from_upload) | **POST** /custom_files | Create a new custom file from a cached presign upload
 [**create_data_request_token**](PDFApi.md#create_data_request_token) | **POST** /data_requests/{data_request_id}/tokens | Creates a new data request token for form authentication
 [**create_folder**](PDFApi.md#create_folder) | **POST** /folders/ | Create a folder
@@ -273,6 +274,57 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CreateCombinedSubmissionResponse**](CreateCombinedSubmissionResponse.md)
+
+### Authorization
+
+[api_token_basic](../README.md#api_token_basic)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+
+
+# **copy_template**
+> Template copy_template(template_id, copy_template_data)
+
+Copy a Template
+
+### Example
+```ruby
+# load the gem
+require 'docspring'
+# setup authorization
+DocSpring.configure do |config|
+  # Configure HTTP basic authorization: api_token_basic
+  config.username = 'YOUR USERNAME'
+  config.password = 'YOUR PASSWORD'
+end
+
+api_instance = DocSpring::PDFApi.new
+template_id = 'tpl_000000000000000001' # String | 
+copy_template_data = DocSpring::CopyTemplateData.new # CopyTemplateData | 
+
+begin
+  #Copy a Template
+  result = api_instance.copy_template(template_id, copy_template_data)
+  p result
+rescue DocSpring::ApiError => e
+  puts "Exception when calling PDFApi->copy_template: #{e}"
+end
+```
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **template_id** | **String**|  | 
+ **copy_template_data** | [**CopyTemplateData**](CopyTemplateData.md)|  | 
+
+### Return type
+
+[**Template**](Template.md)
 
 ### Authorization
 

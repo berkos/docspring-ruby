@@ -22,6 +22,8 @@ module DocSpring
 
     attr_accessor :order
 
+    attr_accessor :sort_order
+
     attr_accessor :fields
 
     attr_accessor :metadata
@@ -81,6 +83,7 @@ module DocSpring
         :'name' => :'name',
         :'email' => :'email',
         :'order' => :'order',
+        :'sort_order' => :'sort_order',
         :'fields' => :'fields',
         :'metadata' => :'metadata',
         :'state' => :'state',
@@ -106,6 +109,7 @@ module DocSpring
         :'name' => :'String',
         :'email' => :'String',
         :'order' => :'Integer',
+        :'sort_order' => :'Integer',
         :'fields' => :'Array<String>',
         :'metadata' => :'Object',
         :'state' => :'String',
@@ -146,6 +150,10 @@ module DocSpring
 
       if attributes.has_key?(:'order')
         self.order = attributes[:'order']
+      end
+
+      if attributes.has_key?(:'sort_order')
+        self.sort_order = attributes[:'sort_order']
       end
 
       if attributes.has_key?(:'fields')
@@ -223,6 +231,10 @@ module DocSpring
         invalid_properties.push('invalid value for "order", order cannot be nil.')
       end
 
+      if @sort_order.nil?
+        invalid_properties.push('invalid value for "sort_order", sort_order cannot be nil.')
+      end
+
       if @metadata.nil?
         invalid_properties.push('invalid value for "metadata", metadata cannot be nil.')
       end
@@ -239,6 +251,7 @@ module DocSpring
     def valid?
       return false if @id.nil?
       return false if @order.nil?
+      return false if @sort_order.nil?
       return false if @metadata.nil?
       return false if @state.nil?
       state_validator = EnumAttributeValidator.new('String', ['pending', 'completed'])
@@ -289,6 +302,7 @@ module DocSpring
           name == o.name &&
           email == o.email &&
           order == o.order &&
+          sort_order == o.sort_order &&
           fields == o.fields &&
           metadata == o.metadata &&
           state == o.state &&
@@ -315,7 +329,7 @@ module DocSpring
     # Calculates hash code according to all attributes.
     # @return [Fixnum] Hash code
     def hash
-      [id, name, email, order, fields, metadata, state, viewed_at, completed_at, auth_type, auth_second_factor_type, auth_provider, auth_session_started_at, auth_session_id_hash, auth_user_id_hash, auth_username_hash, auth_phone_number_hash, ip_address, user_agent].hash
+      [id, name, email, order, sort_order, fields, metadata, state, viewed_at, completed_at, auth_type, auth_second_factor_type, auth_provider, auth_session_started_at, auth_session_id_hash, auth_user_id_hash, auth_username_hash, auth_phone_number_hash, ip_address, user_agent].hash
     end
 
     # Builds the object from hash

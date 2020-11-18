@@ -1,3 +1,7 @@
+### 1.3.2 [November 19, 2020]
+
+- Added "sort_order" property for Submission Data Requests
+
 ### 1.3.1 [September 27, 2020]
 
 - Changed gem author to DocSpring

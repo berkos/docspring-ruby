@@ -102,6 +102,20 @@ describe 'PDFApi' do
       expect(result).to_not be_nil
     end
   end
+  # integration tests for copy_template
+  # Copy a Template
+  # @param template_id 
+  # @param copy_template_data 
+  # @param [Hash] opts the optional parameters
+  # @return [Template]
+  describe 'copy_template test' do
+    it 'should work' do
+      template_id = 'tpl_000000000000000001' # String | 
+      copy_template_data = DocSpring::CopyTemplateData.new # CopyTemplateData | 
+      result = api_instance.copy_template(template_id, copy_template_data)
+      expect(result).to_not be_nil
+    end
+  end
   # integration tests for create_custom_file_from_upload
   # Create a new custom file from a cached presign upload
   # @param create_custom_file_data 

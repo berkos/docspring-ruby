@@ -296,6 +296,65 @@ module DocSpring
       return data, status_code, headers
     end
 
+    # Copy a Template
+    # @param template_id 
+    # @param copy_template_data 
+    # @param [Hash] opts the optional parameters
+    # @return [Template]
+    def copy_template(template_id, copy_template_data, opts = {})
+      data, _status_code, _headers = copy_template_with_http_info(template_id, copy_template_data, opts)
+      data
+    end
+
+    # Copy a Template
+    # @param template_id 
+    # @param copy_template_data 
+    # @param [Hash] opts the optional parameters
+    # @return [Array<(Template, Fixnum, Hash)>] Template data, response status code and response headers
+    def copy_template_with_http_info(template_id, copy_template_data, opts = {})
+      if @api_client.config.debugging
+        @api_client.config.logger.debug 'Calling API: PDFApi.copy_template ...'
+      end
+      # verify the required parameter 'template_id' is set
+      if @api_client.config.client_side_validation && template_id.nil?
+        fail ArgumentError, "Missing the required parameter 'template_id' when calling PDFApi.copy_template"
+      end
+      # verify the required parameter 'copy_template_data' is set
+      if @api_client.config.client_side_validation && copy_template_data.nil?
+        fail ArgumentError, "Missing the required parameter 'copy_template_data' when calling PDFApi.copy_template"
+      end
+      # resource path
+      local_var_path = '/templates/{template_id}/copy'.sub('{' + 'template_id' + '}', template_id.to_s)
+
+      # query parameters
+      query_params = {}
+
+      # header parameters
+      header_params = {}
+      # HTTP header 'Accept' (if needed)
+      header_params['Accept'] = @api_client.select_header_accept(['application/json'])
+      # HTTP header 'Content-Type'
+      header_params['Content-Type'] = @api_client.select_header_content_type(['application/json'])
+
+      # form parameters
+      form_params = {}
+
+      # http body (model)
+      post_body = @api_client.object_to_http_body(copy_template_data)
+      auth_names = ['api_token_basic']
+      data, status_code, headers = @api_client.call_api(:POST, local_var_path,
+        :header_params => header_params,
+        :query_params => query_params,
+        :form_params => form_params,
+        :body => post_body,
+        :auth_names => auth_names,
+        :return_type => 'Template')
+      if @api_client.config.debugging
+        @api_client.config.logger.debug "API called: PDFApi#copy_template\nData: #{data.inspect}\nStatus code: #{status_code}\nHeaders: #{headers}"
+      end
+      return data, status_code, headers
+    end
+
     # Create a new custom file from a cached presign upload
     # @param create_custom_file_data 
     # @param [Hash] opts the optional parameters
