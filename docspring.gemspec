@@ -27,6 +27,7 @@ Gem::Specification.new do |s|
   s.license     = 'MIT'
   s.required_ruby_version = ">= 1.9"
 
+  s.add_runtime_dependency 'addressable'
   s.add_runtime_dependency 'typhoeus', '~> 1.0', '>= 1.0.1'
   s.add_runtime_dependency 'ffi', '~> 1.0', '>= 1.9.24'
   s.add_runtime_dependency 'json', '>= 1.8'
